@@ -1,0 +1,525 @@
+/* Lenis Smooth Scroll CSS */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+:root {
+    --primary-blue: #004a99;
+    --mid-blue: #337ab7;
+    --light-blue: #8fbce6;
+    --sky-blue: #dbefff;
+    --accent-orange: #ff6b00;
+    --text-dark: #1a2b3c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--sky-blue);
+    overflow-x: hidden;
+    color: var(--text-dark);
+}
+
+/* Navigation */
+nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo span {
+    color: var(--accent-orange);
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--sky-blue) 0%, #ffffff 100%);
+}
+
+/* Paper-cut Background Structure */
+.paper-cut-scene {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    filter: drop-shadow(0px -8px 12px rgba(0, 0, 0, 0.15));
+}
+
+.wave-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Niche Assets */
+.asset {
+    position: absolute;
+    bottom: 10px;
+    z-index: -1;
+}
+
+/* Layer Specific Styling */
+.layer-back {
+    z-index: 1;
+}
+
+.layer-back .wave-svg path {
+    fill: var(--light-blue);
+}
+
+.asset-city {
+    left: 35%;
+    width: 25%;
+    fill: var(--light-blue);
+    bottom: 80px;
+}
+
+.asset-pylon-back {
+    right: 20%;
+    width: 8%;
+    fill: var(--light-blue);
+    bottom: 100px;
+    opacity: 0.7;
+}
+
+.layer-mid {
+    z-index: 2;
+    bottom: -20px;
+}
+
+.layer-mid .wave-svg path {
+    fill: var(--mid-blue);
+}
+
+.asset-pylon-mid {
+    left: 10%;
+    width: 12%;
+    fill: var(--mid-blue);
+    bottom: 120px;
+}
+
+.asset-substation {
+    right: 15%;
+    width: 18%;
+    fill: var(--mid-blue);
+    bottom: 90px;
+}
+
+.layer-front {
+    z-index: 3;
+    bottom: -40px;
+}
+
+.layer-front .wave-svg path {
+    fill: var(--primary-blue);
+}
+
+.asset-transformer {
+    left: 55%;
+    width: 15%;
+    fill: var(--primary-blue);
+    bottom: 70px;
+}
+
+.asset-panel {
+    left: 72%;
+    width: 8%;
+    fill: var(--primary-blue);
+    bottom: 60px;
+}
+
+/* Windmill Asset */
+.windmill-asset {
+    position: absolute;
+    bottom: 50px;
+    right: 2%;
+    width: 290px;
+    height: 433px;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.tree-asset {
+    position: absolute;
+    bottom: -25px;
+    right: 1%;
+    width: 170px;
+    height: 433px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tree-asset-2 {
+    position: absolute;
+    bottom: -50px;
+    right: 14%;
+    width: 128px;
+    height: 401px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tree-asset-3 {
+    position: absolute;
+    bottom: -30px;
+    right: 12%;
+    width: 70px;
+    height: 400px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Transformer Asset */
+.transformer-asset {
+    position: absolute;
+    bottom: 35px;
+    left: 9%;
+    width: 267px;
+    height: 287px;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+/* Skyscraper Asset */
+.skyscraper-asset {
+    position: absolute;
+    bottom: 50px;
+    left: 5px;
+    width: 581px;
+    height: 579px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Sky Elements */
+.sun {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #ffca28, #ff8c00);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+    z-index: 0;
+}
+
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    z-index: 2;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.cloud-1 {
+    top: 20%;
+    left: 10%;
+    width: 120px;
+    height: 40px;
+}
+
+.cloud-1::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 15px;
+}
+
+.cloud-1::after {
+    width: 70px;
+    height: 70px;
+    top: -35px;
+    right: 15px;
+}
+
+.cloud-2 {
+    top: 35%;
+    right: 25%;
+    width: 160px;
+    height: 50px;
+    opacity: 0.8;
+}
+
+.cloud-2::before {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 20px;
+}
+
+.cloud-2::after {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    right: 25px;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 850px;
+    padding: 0 20px;
+    margin-top: -15vh;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 107, 0, 0.1);
+    border: 1px solid var(--accent-orange);
+    border-radius: 50px;
+    color: var(--accent-orange);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+}
+
+.hero-desc {
+    font-size: 1.15rem;
+    color: #334455;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--accent-orange);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255, 107, 0, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 107, 0, 0.35);
+}
+
+/* Add this to your existing <style> tag */
+
+/* About Section Styles */
+.about-section {
+    position: relative;
+    padding: 10rem 5%;
+    background-color: #ffffff;
+    /* Clean white transition from the hero */
+    overflow: hidden;
+}
+
+.about-watermark {
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    font-size: 20vw;
+    font-weight: 800;
+    color: rgba(0, 74, 153, 0.03);
+    /* Extremely faint primary blue */
+    z-index: 0;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.about-content {
+    padding-right: 2rem;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    color: var(--primary-blue);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.section-desc {
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: flex;
+    gap: 3rem;
+    border-top: 1px solid rgba(0, 74, 153, 0.1);
+    padding-top: 2rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent-orange);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--mid-blue);
+    letter-spacing: 1px;
+}
+
+/* Parallax Image Wrapper */
+.about-visual {
+    position: relative;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    /* Crucial for parallax: hides the overflowing image */
+    box-shadow: 0 20px 40px rgba(0, 74, 153, 0.15);
+}
+
+.img-parallax {
+    width: 100%;
+    height: 130%;
+    /* Image must be taller than wrapper to allow movement */
+    object-fit: cover;
+    transform-origin: center;
+}
+
+.floating-accent {
+    position: absolute;
+    bottom: -30px;
+    left: -40px;
+    background: var(--primary-blue);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid var(--accent-orange);
+}
+
+.floating-accent h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.floating-accent p {
+    font-size: 0.9rem;
+    color: var(--sky-blue);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 968px) {
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+
+    .floating-accent {
+        left: 20px;
+        bottom: -20px;
+    }
+}

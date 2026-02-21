@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGES - Dynamo Global Electrical Systems</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            /* Updated Blue Palette for Industrial feel */
+            --primary-blue: #004a99; /* Darker, richer blue for foreground */
+            --mid-blue: #337ab7;
+            --light-blue: #8fbce6;
+            --sky-blue: #dbefff;
+            --accent-orange: #ff6b00; /* Slightly punchier orange */
+            --text-dark: #1a2b3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--sky-blue);
+            overflow-x: hidden;
+            color: var(--text-dark);
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--sky-blue) 0%, #ffffff 100%);
+        }
+
+        /* Paper-cut Background Structure */
+        .paper-cut-scene {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .layer {
+            position: absolute;
+            bottom: 0;
+            left: -10%; /* Start slightly offscreen for movement */
+            width: 120%; /* Wider for slow panning animation */
+            display: flex;
+            align-items: flex-bottom;
+            filter: drop-shadow(0px -8px 12px rgba(0, 0, 0, 0.15));
+        }
+
+        /* SVGs defining the waves */
+        .wave-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Niche Assets (Silhouettes placed on layers) */
+        .asset {
+            position: absolute;
+            bottom: 10px; /* Sits just on the wave line */
+            z-index: -1; /* Behind the wave crest slightly */
+        }
+
+        /* Layer Specific Styling */
+        /* Back Layer - City & Transmission */
+        .layer-back { z-index: 1; }
+        .layer-back .wave-svg path { fill: var(--light-blue); }
+        .asset-city { left: 15%; width: 25%; fill: var(--light-blue); bottom: 80px; }
+        .asset-pylon-back { right: 20%; width: 8%; fill: var(--light-blue); bottom: 100px; opacity: 0.7; }
+
+        /* Mid Layer - Grid Infrastructure */
+        .layer-mid { z-index: 2; bottom: -20px; }
+        .layer-mid .wave-svg path { fill: var(--mid-blue); }
+        .asset-pylon-mid { left: 10%; width: 12%; fill: var(--mid-blue); bottom: 120px; }
+        .asset-substation { right: 15%; width: 18%; fill: var(--mid-blue); bottom: 90px; }
+
+        /* Front Layer - Hero Products (Transformer/Panel) */
+        .layer-front { z-index: 3; bottom: -40px; }
+        .layer-front .wave-svg path { fill: var(--primary-blue); }
+        .asset-transformer { left: 55%; width: 15%; fill: var(--primary-blue); bottom: 70px; }
+        .asset-panel { left: 72%; width: 8%; fill: var(--primary-blue); bottom: 60px; }
+
+
+        /* Sky Elements */
+        .sun {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ffca28, #ff8c00);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+            z-index: 0;
+        }
+
+        /* Decorative Clouds */
+        .cloud-group { position: absolute; width: 100%; height: 100%; z-index: 0; }
+        .cloud {
+            position: absolute;
+            background: #fff;
+            border-radius: 200px;
+            opacity: 0.8;
+        }
+        .c1 { top: 20%; left: 10%; width: 120px; height: 40px; }
+        .c2 { top: 30%; right: 20%; width: 180px; height: 60px; opacity: 0.6; }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 850px;
+            padding: 0 20px;
+            margin-top: -15vh; /* Lift above the infrastructure assets */
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 107, 0, 0.1);
+            border: 1px solid var(--accent-orange);
+            border-radius: 50px;
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: #334455;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.25);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(255, 107, 0, 0.35); }
+
+    </style>
+</head>
+<body>
+
+    <nav class="ui-anim">
+        <a href="#" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--accent-orange)" stroke="var(--accent-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            DGES<span>.</span>
+        </a>
+        </nav>
+
+    <section class="hero-section">
+        
+        <div class="paper-cut-scene">
+            <div class="sun"></div>
+            <div class="cloud-group">
+                <div class="cloud c1"></div>
+                <div class="cloud c2"></div>
+            </div>
+
+            <div class="layer layer-back">
+                <svg class="asset asset-city" viewBox="0 0 100 50" preserveAspectRatio="none">
+                    <path d="M0,50 L0,20 L10,20 L10,5 L20,5 L20,25 L30,25 L30,10 L40,10 L40,30 L50,30 L50,15 L60,15 L60,35 L70,35 L70,0 L80,0 L80,20 L90,20 L90,40 L100,40 L100,50 Z"/>
+                </svg>
+                <svg class="wave-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style="height: 35vh;">
+                    <path d="M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,213.3C840,224,960,224,1080,202.7C1200,181,1320,139,1380,117.3L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                </svg>
+                
+            </div>
+
+            <div class="layer layer-mid">
+                <svg class="wave-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style="height: 28vh;">
+                   <path d="M0,128L80,149.3C160,171,320,213,480,224C640,235,800,213,960,192C1120,171,1280,149,1360,138.7L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+                </svg>
+            </div>
+
+            <div class="layer layer-front">
+                 <svg class="wave-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style="height: 22vh;">
+                    <path d="M0,192L120,186.7C240,181,480,171,720,181.3C960,192,1200,224,1320,240L1440,256L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                </svg>
+                <svg width="100%" height="100%" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <g id="radiator_bank">
+      <rect x="0" y="0" width="70" height="15" fill="#91a3ad" stroke="#687a85" stroke-width="2" rx="3"/>
+      <rect x="5" y="15" width="10" height="280" fill="#7d919c" stroke="#687a85" stroke-width="1.5" rx="2"/>
+      <rect x="20" y="15" width="10" height="280" fill="#7d919c" stroke="#687a85" stroke-width="1.5" rx="2"/>
+      <rect x="35" y="15" width="10" height="280" fill="#7d919c" stroke="#687a85" stroke-width="1.5" rx="2"/>
+      <rect x="50" y="15" width="10" height="280" fill="#7d919c" stroke="#687a85" stroke-width="1.5" rx="2"/>
+      <rect x="0" y="295" width="70" height="15" fill="#91a3ad" stroke="#687a85" stroke-width="2" rx="3"/>
+    </g>
+
+    <g id="hv_bushing">
+      <rect x="-20" y="-10" width="40" height="25" fill="#91a3ad" stroke="#687a85" stroke-width="2" rx="2"/>
+      <rect x="-15" y="-25" width="30" height="15" fill="#7d919c" stroke="#687a85" stroke-width="2"/>
+      <path d="M -22 -25 Q 0 -35 22 -25 L 16 -12 L -16 -12 Z" fill="#3b2d28"/>
+      <path d="M -22 -45 Q 0 -55 22 -45 L 16 -32 L -16 -32 Z" fill="#3b2d28"/>
+      <path d="M -22 -65 Q 0 -75 22 -65 L 16 -52 L -16 -52 Z" fill="#3b2d28"/>
+      <path d="M -22 -85 Q 0 -95 22 -85 L 16 -72 L -16 -72 Z" fill="#3b2d28"/>
+      <path d="M -22 -105 Q 0 -115 22 -105 L 16 -92 L -16 -92 Z" fill="#3b2d28"/>
+      <path d="M -22 -125 Q 0 -135 22 -125 L 16 -112 L -16 -112 Z" fill="#3b2d28"/>
+      <path d="M -12 -135 L 12 -135 L 6 -150 L -6 -150 Z" fill="#91a3ad" stroke="#687a85" stroke-width="1"/>
+      <rect x="-3" y="-170" width="6" height="20" fill="#555" />
+    </g>
+  </defs>
+
+  <rect width="800" height="800" fill="#e9f0f5" />
+
+  <polygon points="40,750 760,750 680,680 120,680" fill="#dcd8d1" stroke="#b5b1a8" stroke-width="2"/>
+  <rect x="40" y="750" width="720" height="25" fill="#b5b1a8" />
+
+  <rect x="250" y="660" width="50" height="20" fill="#687a85" />
+  <rect x="450" y="660" width="50" height="20" fill="#687a85" />
+
+  <use href="#radiator_bank" x="140" y="340" />
+  
+  <rect x="200" y="280" width="380" height="380" fill="#91a3ad" stroke="#687a85" stroke-width="3" rx="4"/>
+  
+  <line x1="200" y1="600" x2="580" y2="600" stroke="#687a85" stroke-width="3" />
+  <rect x="180" y="280" width="20" height="15" fill="#91a3ad" stroke="#687a85" stroke-width="2" />
+  <rect x="580" y="280" width="20" height="15" fill="#91a3ad" stroke="#687a85" stroke-width="2" />
+
+  <use href="#radiator_bank" x="350" y="320" />
+  <use href="#radiator_bank" x="430" y="320" />
+  <use href="#radiator_bank" x="510" y="320" />
+
+  <circle cx="270" cy="380" r="45" fill="#91a3ad" stroke="#687a85" stroke-width="4"/>
+  <circle cx="270" cy="380" r="32" fill="none" stroke="#687a85" stroke-width="2" stroke-dasharray="6,6"/> <circle cx="270" cy="380" r="28" fill="#a4b5bf" /> 
+
+  <path d="M 230 280 L 210 160 L 260 160 Z" fill="#687a85" />
+  <path d="M 320 280 L 330 160 L 300 160 Z" fill="#687a85" />
+  
+  <rect x="140" y="90" width="220" height="110" rx="55" fill="#91a3ad" stroke="#687a85" stroke-width="3" />
+  <ellipse cx="195" cy="145" rx="20" ry="55" fill="#a4b5bf" stroke="#687a85" stroke-width="2"/>
+  
+  <path d="M 270 200 Q 270 240 280 280" fill="none" stroke="#333" stroke-width="8"/>
+  
+  <path d="M 170 145 Q 120 200 180 300" fill="none" stroke="#222" stroke-width="4"/>
+
+  <use href="#hv_bushing" x="400" y="280" />
+  <use href="#hv_bushing" x="480" y="280" />
+  <use href="#hv_bushing" x="560" y="280" />
+
+  <rect x="655" y="600" width="16" height="80" fill="#7d919c" stroke="#687a85" stroke-width="2"/>
+  <rect x="635" y="680" width="56" height="10" fill="#687a85" rx="2"/>
+  <g transform="translate(663, 600) scale(0.65)">
+      <path d="M -25 0 Q 0 -10 25 0 L 15 -15 L -15 -15 Z" fill="#687a85"/>
+      <path d="M -25 -25 Q 0 -35 25 -25 L 15 -40 L -15 -40 Z" fill="#687a85"/>
+      <path d="M -25 -50 Q 0 -60 25 -50 L 15 -65 L -15 -65 Z" fill="#687a85"/>
+      <path d="M -25 -75 Q 0 -85 25 -75 L 15 -90 L -15 -90 Z" fill="#687a85"/>
+      <path d="M -25 -100 Q 0 -110 25 -100 L 15 -115 L -15 -115 Z" fill="#687a85"/>
+      <path d="M -25 -125 Q 0 -135 25 -125 L 15 -140 L -15 -140 Z" fill="#687a85"/>
+      <path d="M -25 -150 Q 0 -160 25 -150 L 15 -165 L -15 -165 Z" fill="#687a85"/>
+      <path d="M -25 -175 Q 0 -185 25 -175 L 15 -190 L -15 -190 Z" fill="#687a85"/>
+      <path d="M -25 -200 Q 0 -210 25 -200 L 15 -215 L -15 -215 Z" fill="#687a85"/>
+      <circle cx="0" cy="-225" r="10" fill="#91a3ad" stroke="#687a85" stroke-width="2"/>
+  </g>
+  <path d="M 580 500 Q 640 550 663 450" fill="none" stroke="#333" stroke-width="3"/>
+  
+</svg>
+            </div>
+        </div>
+
+        <div class="hero-content ui-anim">
+            <div class="badge">Sourcing India. Powering the World.</div>
+            <h1 class="hero-title">Engineered for Global Grids.</h1>
+            <p class="hero-desc">Providing high-performance electrical transformers, control panels, and power infrastructure solutions for residential, commercial, and industrial demands worldwide.</p>
+            <button class="btn btn-primary">Explore Solutions</button>
+        </div>
+    </section>
+
+    <script>
+        // --- GSAP Animations ---
+
+        // 1. UI Entrance (Text and Buttons)
+        gsap.from(".ui-anim > *", {
+            y: 40,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        // 2. Gentle Environmental Movement (Replacing mouse parallax)
+        // This makes the scene feel "alive" without requiring user interaction.
+        
+        // Clouds floating
+        gsap.to(".c1", { x: 100, duration: 40, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".c2", { x: -80, duration: 50, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+        // Gentle Wave Panning
+        // The layers move very slowly horizontally at different speeds to create depth.
+        gsap.to(".layer-back", { x: '-5%', duration: 20, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".layer-mid", { x: '-8%', duration: 15, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".layer-front", { x: '-12%', duration: 12, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+    </script>
+</body>
+</html>
