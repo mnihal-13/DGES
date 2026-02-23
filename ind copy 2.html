@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGES | Engineered Energy Systems</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --bg-light: #f8f9fa;
+            --grid-line: rgba(0, 48, 87, 0.08); /* Tinted with Navy for the blueprint feel */
+            --text-main: #0a1118;
+            --text-muted: #5c6a7a;
+            
+            /* Logo Colors */
+            --primary-blue: #003057; 
+            --accent-amber: #F3911F; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            /* Background color must be transparent to see the liquid layer underneath */
+            background-color: transparent; 
+        }
+
+        /* --- Liquid Background Layer --- */
+        .liquid-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; overflow: hidden; pointer-events: none;
+            background-color: var(--bg-light); /* Base light color */
+        }
+        
+        .blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(90px); 
+            opacity: 0.15; /* Soft opacity for light theme */
+            will-change: transform;
+        }
+        
+        /* Using the brand colors for the liquid fluid */
+        .blob-1 { width: 45vw; height: 45vw; background: var(--primary-blue); top: -10%; left: -5%; }
+        .blob-2 { width: 40vw; height: 40vw; background: var(--accent-amber); bottom: -10%; right: -5%; }
+        .blob-3 { width: 35vw; height: 35vw; background: #8fbce6; top: 30%; left: 35%; }
+
+        /* --- Engineered Background Grid --- */
+        .grid-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; pointer-events: none;
+            background-image: 
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+
+        /* --- Smooth Scroll --- */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        /* --- Blueprint Navigation --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            height: 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 4rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--grid-line);
+            /* Glassmorphism */
+            background: rgba(248, 249, 250, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); text-decoration: none; letter-spacing: -0.5px;}
+        .logo span { color: var(--accent-amber); }
+        .nav-links { display: flex; gap: 3rem; }
+        .nav-links a { color: var(--primary-blue); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Floating Parallax Hero --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-text-wrapper {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            mix-blend-mode: multiply;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(4rem, 9vw, 9rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -2px;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Floating Hero Images (Glassy Edges) */
+        .floating-img {
+            position: absolute;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 48, 87, 0.08);
+            z-index: 5;
+            border: 1px solid var(--grid-line);
+            padding: 10px;
+            /* Glassmorphism for the Polaroid border */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .floating-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .img-1 { top: 15%; left: 10%; width: 300px; height: 400px; }
+        .img-2 { bottom: 10%; right: 15%; width: 350px; height: 250px; }
+        .img-3 { top: 20%; right: 10%; width: 200px; height: 250px; }
+
+        /* --- The Unique Horizontal Scroll Section --- */
+        .horizontal-section {
+            overflow: hidden;
+            /* Replaced solid white with glass so the liquid blooms underneath */
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid var(--grid-line);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .horizontal-container {
+            display: flex;
+            width: 400vw; 
+            height: 100vh;
+        }
+
+        .panel {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5vw;
+            position: relative;
+            border-right: 1px solid var(--grid-line);
+        }
+
+        .panel-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            align-items: center;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .panel-text { padding-right: 2rem; }
+        
+        .panel-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-amber);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .panel-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+        }
+
+        .panel-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Glassmorphism for the image wrappers */
+        .panel-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            padding: 1.5rem;
+            border: 1px solid var(--grid-line);
+            overflow: hidden;
+            background: rgba(248, 249, 250, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .panel-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.2); 
+            will-change: transform;
+        }
+
+        /* Aesthetic Grid Crosshairs */
+        .crosshair {
+            position: absolute;
+            width: 15px; height: 15px;
+        }
+        .crosshair::before, .crosshair::after {
+            content: ''; position: absolute; background: var(--primary-blue);
+        }
+        .crosshair::before { width: 100%; height: 1px; top: 7px; left: 0; }
+        .crosshair::after { width: 1px; height: 100%; top: 0; left: 7px; }
+
+        .ch-tl { top: 0; left: 0; }
+        .ch-br { bottom: 0; right: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="grid-overlay"></div>
+
+    <nav>
+        <a href="#" class="logo">DGES<span>.</span></a>
+        <div class="nav-links">
+            <a href="#">Network</a>
+            <a href="#">Equipment</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        
+        <div class="floating-img img-1" data-speed="-0.5">
+            <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=800&auto=format&fit=crop" alt="Transformer Details">
+        </div>
+        <div class="floating-img img-2" data-speed="0.8">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop" alt="Control Panels">
+        </div>
+        <div class="floating-img img-3" data-speed="-0.2">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop" alt="Renewables">
+        </div>
+
+        <div class="hero-text-wrapper">
+            <h1 class="hero-title hero-anim">POWERING<br>THE GLOBE.</h1>
+            <p class="hero-desc hero-anim">Architects of international energy infrastructure. Sourcing the highest grade electrical components from India for worldwide deployment.</p>
+        </div>
+    </section>
+
+    <section class="horizontal-section">
+        <div class="horizontal-container">
+            
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">PHASE 01 / SOURCING</div>
+                        <h2 class="panel-title">Precision Manufactured.</h2>
+                        <p class="panel-desc">We bypass the standard supply chain. DGES partners directly with top-tier Indian manufacturers, securing heavy-duty electrical components engineered to exact international ISO specifications. From raw copper to finalized switchgears, quality is non-negotiable.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="https://images.unsplash.com/photo-1565515261944-77dd1f6cc97a?q=80&w=1200&auto=format&fit=crop" class="horiz-img" alt="Manufacturing">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">PHASE 02 / TRANSMISSION</div>
+                        <h2 class="panel-title">High-Capacity Transformers.</h2>
+                        <p class="panel-desc">The backbone of any grid. We supply distribution and power transformers built to handle extreme loads and varied climates. Designed for maximum efficiency and minimum loss, keeping global energy moving seamlessly.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?q=80&w=1200&auto=format&fit=crop" class="horiz-img" alt="High Voltage Substation">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">PHASE 03 / DISTRIBUTION</div>
+                        <h2 class="panel-title">Industrial Switchgears.</h2>
+                        <p class="panel-desc">Absolute control over the flow. Our sourced industrial panels, relays, and heavy-duty cabling ensure that power is routed safely and intelligently to residential, commercial, and industrial endpoints.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="https://images.unsplash.com/photo-1580983546051-51842eb1bce4?q=80&w=1200&auto=format&fit=crop" class="horiz-img" alt="Switchgear Panels">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">PHASE 04 / RENEWABLE</div>
+                        <h2 class="panel-title">Sustainable Integration.</h2>
+                        <p class="panel-desc">Connecting tomorrow's energy today. We supply the crucial interfacing equipment required to tie large-scale solar arrays and wind farms into existing international power grids.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop" class="horiz-img" alt="Wind Turbines">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <h2 style="font-family: 'Space Grotesk'; font-size: 2rem; color: var(--primary-blue);">Next Section Goes Here...</h2>
+    </section>
+
+    <script>
+        // --- 1. Bulletproof Lenis Initialization ---
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+            smoothTouch: false
+        });
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- 2. Liquid Background Orbit Animation ---
+        gsap.to(".blob-1", { x: "15vw", y: "10vh", duration: 15, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".blob-2", { x: "-15vw", y: "-10vh", duration: 18, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".blob-3", { x: "10vw", y: "-15vh", duration: 22, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+        // --- 3. Hero Load & Parallax Animations ---
+        gsap.from(".hero-anim", {
+            y: 50,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        gsap.from(".floating-img", {
+            y: 100,
+            opacity: 0,
+            duration: 1.5,
+            stagger: 0.15,
+            ease: "power4.out"
+        });
+
+        const floatingImages = document.querySelectorAll(".floating-img");
+        floatingImages.forEach(img => {
+            const speed = img.getAttribute("data-speed");
+            gsap.to(img, {
+                y: () => (window.innerHeight * speed),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        // --- 4. The Stunning Horizontal Scroll Effect ---
+        const container = document.querySelector(".horizontal-container");
+        const panels = gsap.utils.toArray(".panel");
+
+        let scrollTween = gsap.to(panels, {
+            xPercent: -100 * (panels.length - 1),
+            ease: "none", 
+            scrollTrigger: {
+                trigger: ".horizontal-section",
+                pin: true, 
+                scrub: 1,  
+                end: () => "+=" + (container.offsetWidth - window.innerWidth)
+            }
+        });
+
+        // --- 5. Inner Image Parallax (While scrolling horizontally) ---
+        gsap.utils.toArray(".horiz-img").forEach((img, i) => {
+            gsap.fromTo(img, 
+                { x: "-20%" }, 
+                {
+                    x: "20%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".horizontal-section",
+                        start: "top top",
+                        end: () => "+=" + (container.offsetWidth - window.innerWidth),
+                        scrub: true
+                    }
+                }
+            );
+        });
+    </script>
+</body>
+</html>
