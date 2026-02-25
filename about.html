@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGES | Engineered Energy Systems</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="grid-overlay"></div>
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Breadcrumb -->
+        <section class="edge-to-edge-hero">
+
+            <div class="hero-spanning-line top-line"></div>
+            <!-- <div class="hero-spanning-line bottom-line"></div> -->
+
+            <div class="hero-particles"></div>
+
+            <div class="hero-content-wrapper">
+
+                <div class="tech-breadcrumb-wrapper gs-reveal">
+                    <div class="tech-breadcrumb">
+                        <div class="tech-breadcrumb-bg"></div>
+
+                        <ol>
+                            <li>
+                                <a href="index.html">HOME</a>
+                            </li>
+                            <li class="separator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="13 17 18 12 13 7"></polyline>
+                                    <polyline points="6 17 11 12 6 7"></polyline>
+                                </svg>
+                            </li>
+                            <li aria-current="page" class="current-page">
+                                ABOUT US
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="hero-typography gs-reveal">
+                    <h1 class="hero-mega-title"><span class="gradient-text">ABOUT US</span></h1>
+                    <p class="hero-mega-desc">
+                        Unlock your project's potential with our industry-leading procurement network.<br>
+                        Designed for the <strong>global electrical.</strong>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- What We Do -->
+        <section class="about-what-we-do">
+            <div class="network-glass-panel gs-reveal-up">
+                <div class="crosshair ch-tl"></div>
+                <div class="crosshair ch-br"></div>
+                <div class="crosshair ch-tr"></div>
+                <div class="crosshair ch-bl"></div>
+
+                <!-- Stats Bar -->
+                <div class="wwd-stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="45" data-suffix="+">0</span>
+                        <span class="stat-label">Countries Served</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="500" data-suffix="MW+">0</span>
+                        <span class="stat-label">Capacity Exported</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="100" data-suffix="%">0</span>
+                        <span class="stat-label">ISO Certified</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="24" data-suffix="h">0</span>
+                        <span class="stat-label">Response Time</span>
+                    </div>
+                </div>
+
+                <div class="what-we-do-layout">
+
+                    <div class="network-content-side">
+                        <div class="blueprint-tag">
+                            <span class="pulse-dot-small"></span> POWERING THE GLOBE
+                        </div>
+
+                        <h2 class="wwd-title">
+                            Exporting World-Class <br>
+                            <span class="gradient-text">Electrical Infrastructure.</span>
+                        </h2>
+
+                        <h3 class="wwd-subtitle">From India's Finest Factories — Directly to Your Grid.</h3>
+
+                        <p class="wwd-desc">
+                            DGES is a specialized <strong>global export company</strong> delivering heavy-duty
+                            electrical equipment — power transformers, industrial switchgears, control panels, and
+                            high-capacity cabling — from India's elite manufacturing facilities to infrastructure
+                            projects across <strong>45+ countries</strong>.
+                        </p>
+                        <p class="wwd-desc">
+                            We don't just ship products. We architect the entire export pipeline: precision sourcing
+                            from certified OEMs, rigorous QA testing to international standards, seamless maritime
+                            logistics, and multi-national regulatory compliance. <strong>We ensure the world stays
+                                powered.</strong>
+                        </p>
+
+                        <div class="wwd-pillars">
+                            <div class="pillar">
+                                <div class="pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                        <polyline points="2 17 12 22 22 17"></polyline>
+                                        <polyline points="2 12 12 17 22 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="pillar-text">Precision Sourcing</div>
+                            </div>
+                            <div class="pillar">
+                                <div class="pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="pillar-text">Global Export Logistics</div>
+                            </div>
+                            <div class="pillar">
+                                <div class="pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="#00cc66" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="pillar-text">ISO Quality Assured</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="network-visual-side">
+                        <div id="plexus-canvas-container"></div>
+
+                        <div class="network-ui-overlay">
+                            <div class="ui-corner top-left"></div>
+                            <div class="ui-corner bottom-right"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Product Showcase Strip -->
+                <div class="product-showcase">
+                    <div class="showcase-label">
+                        <div class="label-line"></div>
+                        <span>WHAT WE EXPORT</span>
+                        <div class="label-line"></div>
+                    </div>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="assets/images/transformer-export.png" alt="Power Transformers" loading="lazy">
+                            <div class="product-overlay">
+                                <h4>Power Transformers</h4>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/images/switchgear-panel.png" alt="Industrial Switchgears & Control Panels"
+                                loading="lazy">
+                            <div class="product-overlay">
+                                <h4>Switchgears & Panels</h4>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <img src="assets/images/cables-conductors.png" alt="Cables & Conductors" loading="lazy">
+                            <div class="product-overlay">
+                                <h4>Cables & Conductors</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="mission-vision-section">
+            <div class="mv-container">
+
+                <div class="mv-section-header gs-fade-up">
+                    <div class="blueprint-tag">
+                        <span class="pulse-dot-small"></span> GUIDING PRINCIPLES
+                    </div>
+                    <h2>Mission & <span class="gradient-text">Vision</span></h2>
+                </div>
+
+                <div class="mv-grid">
+
+                    <div class="mv-glass-card mission-card gs-fade-up">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+
+                        <div class="card-watermark">
+                            <svg viewBox="0 0 100 100" class="spin-slow-right">
+                                <!-- Target/Crosshair for Mission -->
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-amber)"
+                                    stroke-width="0.4" opacity="0.2" />
+                                <circle cx="50" cy="50" r="30" fill="none" stroke="var(--accent-amber)"
+                                    stroke-width="0.4" opacity="0.15" />
+                                <circle cx="50" cy="50" r="15" fill="none" stroke="var(--accent-amber)"
+                                    stroke-width="0.5" opacity="0.2" />
+                                <circle cx="50" cy="50" r="3" fill="var(--accent-amber)" opacity="0.15" />
+                                <line x1="50" y1="2" x2="50" y2="98" stroke="var(--accent-amber)" stroke-width="0.3"
+                                    opacity="0.12" />
+                                <line x1="2" y1="50" x2="98" y2="50" stroke="var(--accent-amber)" stroke-width="0.3"
+                                    opacity="0.12" />
+                            </svg>
+                        </div>
+
+                        <div class="mv-content">
+                            <div class="blueprint-tag">
+                                <span class="pulse-dot"></span> OUR MISSION
+                            </div>
+                            <h2 class="mv-title">The Core<br>Directive.</h2>
+                            <p class="mv-desc">
+                                To engineer a borderless supply chain that <strong>delivers globally compliant
+                                    electrical systems at competitive pricing</strong>. We ensure absolute reliability
+                                from the factory floor to global deployment, eliminating the friction of international
+                                procurement.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mv-glass-card vision-card gs-fade-up" style="transition-delay: 0.2s;">
+                        <div class="crosshair ch-tr"></div>
+                        <div class="crosshair ch-bl"></div>
+
+                        <div class="card-watermark">
+                            <svg viewBox="0 0 100 100" class="spin-slow-left">
+                                <!-- Eye/Starburst for Vision -->
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary-blue)"
+                                    stroke-width="0.4" opacity="0.15" stroke-dasharray="3 6" />
+                                <circle cx="50" cy="50" r="30" fill="none" stroke="var(--primary-blue)"
+                                    stroke-width="0.4" opacity="0.18" />
+                                <circle cx="50" cy="50" r="12" fill="none" stroke="var(--primary-blue)"
+                                    stroke-width="0.6" opacity="0.2" />
+                                <circle cx="50" cy="50" r="4" fill="var(--primary-blue)" opacity="0.12" />
+                                <line x1="50" y1="5" x2="50" y2="20" stroke="var(--primary-blue)" stroke-width="0.4"
+                                    opacity="0.15" />
+                                <line x1="50" y1="80" x2="50" y2="95" stroke="var(--primary-blue)" stroke-width="0.4"
+                                    opacity="0.15" />
+                                <line x1="5" y1="50" x2="20" y2="50" stroke="var(--primary-blue)" stroke-width="0.4"
+                                    opacity="0.15" />
+                                <line x1="80" y1="50" x2="95" y2="50" stroke="var(--primary-blue)" stroke-width="0.4"
+                                    opacity="0.15" />
+                                <line x1="15" y1="15" x2="25" y2="25" stroke="var(--primary-blue)" stroke-width="0.3"
+                                    opacity="0.1" />
+                                <line x1="75" y1="75" x2="85" y2="85" stroke="var(--primary-blue)" stroke-width="0.3"
+                                    opacity="0.1" />
+                                <line x1="85" y1="15" x2="75" y2="25" stroke="var(--primary-blue)" stroke-width="0.3"
+                                    opacity="0.1" />
+                                <line x1="25" y1="75" x2="15" y2="85" stroke="var(--primary-blue)" stroke-width="0.3"
+                                    opacity="0.1" />
+                            </svg>
+                        </div>
+
+                        <div class="mv-content">
+                            <div class="blueprint-tag">
+                                <span class="pulse-dot"
+                                    style="background: var(--primary-blue); box-shadow: 0 0 10px var(--primary-blue);"></span>
+                                OUR VISION
+                            </div>
+                            <h2 class="mv-title">The Future<br>Grid.</h2>
+                            <p class="mv-desc">
+                                To be the undisputed architectural link in global energy infrastructure, seamlessly
+                                connecting India's elite manufacturing prowess with the world's most critical,
+                                demanding, and sustainable power projects.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <!-- <section class="cert-matrix-section">
+            <div class="cert-container">
+                
+                <div class="cert-header gs-fade-up">
+                    <div class="blueprint-tag">
+                        <span class="pulse-dot"></span> QUALITY ASSURANCE
+                    </div>
+                    <h2 class="cert-mega-title">Uncompromising <span class="gradient-text">Standards.</span></h2>
+                    <p class="cert-subtitle">Every component sourced and exported by DGES undergoes rigorous international standard testing. Zero tolerance for failure.</p>
+                </div>
+
+                <div class="cert-grid">
+                    
+                    <div class="cert-glass-card gs-stagger">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <div class="verified-status">
+                            <span class="status-dot"></span> VERIFIED
+                        </div>
+                        
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="cert-name">ISO 9001:2015</h3>
+                        <p class="cert-desc">Partnered exclusively with ISO-certified Indian manufacturing facilities, ensuring globally recognized quality management.</p>
+                    </div>
+
+                    <div class="cert-glass-card gs-stagger">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <div class="verified-status">
+                            <span class="status-dot"></span> VERIFIED
+                        </div>
+                        
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="cert-name">CE Mark</h3>
+                        <p class="cert-desc">European Conformity cleared. Our supplied equipment meets all health, safety, and environmental protection standards for the EEA.</p>
+                    </div>
+
+                    <div class="cert-glass-card gs-stagger">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <div class="verified-status">
+                            <span class="status-dot"></span> VERIFIED
+                        </div>
+                        
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="cert-name">IEC Compliance</h3>
+                        <p class="cert-desc">Fully compliant with the International Electrotechnical Commission, standardizing all heavy-load and distribution technologies.</p>
+                    </div>
+
+                    <div class="cert-glass-card gs-stagger">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <div class="verified-status">
+                            <span class="status-dot"></span> VERIFIED
+                        </div>
+                        
+                        <div class="cert-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="cert-name">BIS Standards</h3>
+                        <p class="cert-desc">Bureau of Indian Standards certified, ensuring the domestic manufacturing origin meets top-tier structural and material benchmarks.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Why Section -->
+        <section class="why-section">
+            <div class="why-container">
+
+                <div class="why-header gs-fade-up">
+                    <div class="blueprint-tag">
+                        <span class="pulse-dot"></span> THE DGES ADVANTAGE
+                    </div>
+                    <h2 class="why-title">Not Resellers.<br><span>Export Specialists.</span></h2>
+                </div>
+
+                <div class="why-dashboard gs-fade-up">
+
+                    <div class="why-list">
+
+                        <div class="why-item active" data-target="img-source">
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" width="50" height="50">
+                                    <circle class="progress-ring__bg" stroke="rgba(0, 48, 87, 0.1)" stroke-width="4"
+                                        fill="transparent" r="22" cx="25" cy="25" />
+                                    <circle class="progress-ring__circle progress-fill" stroke="var(--accent-amber)"
+                                        stroke-width="4" fill="transparent" r="22" cx="25" cy="25" />
+                                </svg>
+                                <div class="item-number">01</div>
+                            </div>
+                            <div class="item-content">
+                                <h3>Direct Manufacturing Access</h3>
+                                <p>We bypass middlemen. DGES holds direct partnerships with India's top-tier, ISO-certified
+                                    manufacturing floors, ensuring pure quality control from raw copper to finished panel.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="why-item" data-target="img-export">
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" width="50" height="50">
+                                    <circle class="progress-ring__bg" stroke="rgba(0, 48, 87, 0.1)" stroke-width="4"
+                                        fill="transparent" r="22" cx="25" cy="25" />
+                                    <circle class="progress-ring__circle progress-fill" stroke="var(--accent-amber)"
+                                        stroke-width="4" fill="transparent" r="22" cx="25" cy="25" />
+                                </svg>
+                                <div class="item-number">02</div>
+                            </div>
+                            <div class="item-content">
+                                <h3>Engineered For Export</h3>
+                                <p>International compliance isn't an afterthought. We handle end-to-end export logistics,
+                                    custom maritime packaging, and stringent multi-national regulatory compliance.</p>
+                            </div>
+                        </div>
+
+                        <div class="why-item" data-target="img-qa">
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" width="50" height="50">
+                                    <circle class="progress-ring__bg" stroke="rgba(0, 48, 87, 0.1)" stroke-width="4"
+                                        fill="transparent" r="22" cx="25" cy="25" />
+                                    <circle class="progress-ring__circle progress-fill" stroke="var(--accent-amber)"
+                                        stroke-width="4" fill="transparent" r="22" cx="25" cy="25" />
+                                </svg>
+                                <div class="item-number">03</div>
+                            </div>
+                            <div class="item-content">
+                                <h3>Uncompromising QA</h3>
+                                <p>Every transformer, switchgear, and cable undergoes rigorous international standard
+                                    testing before it ever enters a shipping container. Zero tolerance for failure.</p>
+                            </div>
+                        </div>
+
+                        <div class="why-item" data-target="img-scale">
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" width="50" height="50">
+                                    <circle class="progress-ring__bg" stroke="rgba(0, 48, 87, 0.1)" stroke-width="4"
+                                        fill="transparent" r="22" cx="25" cy="25" />
+                                    <circle class="progress-ring__circle progress-fill" stroke="var(--accent-amber)"
+                                        stroke-width="4" fill="transparent" r="22" cx="25" cy="25" />
+                                </svg>
+                                <div class="item-number">04</div>
+                            </div>
+                            <div class="item-content">
+                                <h3>Massive Volume Capacity</h3>
+                                <p>Whether you are powering a single commercial complex or outfitting a national utility
+                                    grid, our sourcing network scales to meet massive volume demands instantly.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="why-visualizer">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+
+                        <div class="visual-glass-pane">
+                            <img id="img-source"
+                                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
+                                class="viz-img active" alt="Direct Manufacturing">
+                            <img id="img-export"
+                                src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=800&auto=format&fit=crop"
+                                class="viz-img" alt="Global Export Logistics">
+                            <img id="img-qa"
+                                src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=800&auto=format&fit=crop"
+                                class="viz-img" alt="Quality Assurance">
+                            <img id="img-scale"
+                                src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?q=80&w=800&auto=format&fit=crop"
+                                class="viz-img" alt="Massive Scale Grid">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cta-wrapper gs-fade-up">
+                    <a href="#" class="btn-glow">
+                        Talk to an Export Specialist
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <p class="cta-subtext">Get direct pricing and lead times for global deployment.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Industries Section -->
+        <section class="industries-section">
+            <div class="industries-container">
+
+                <div class="section-header gs-fade-up">
+                    <div class="blueprint-tag">
+                        <span class="pulse-dot"></span> SECTOR ALIGNMENT
+                    </div>
+                    <h2 class="section-title">Industries We Power.</h2>
+                </div>
+
+                <div class="glass-accordion gs-fade-up">
+                    <div class="crosshair ch-tl"></div>
+                    <div class="crosshair ch-br"></div>
+
+
+                    <div class="acc-panel">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+                            class="acc-bg-img" alt="Heavy Manufacturing">
+                        <div class="acc-glass-overlay"></div>
+                        <div class="acc-content">
+                            <div class="acc-header">
+                                <div class="acc-number">01</div>
+                                <h3 class="acc-title">Heavy Manufacturing</h3>
+                            </div>
+                            <div class="acc-hidden-text">
+                                <p>Delivering robust industrial switchgears, motor control centers (MCC), and heavy-duty
+                                    cabling designed to maintain absolute stability in volatile manufacturing environments.
+                                </p>
+                                <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acc-panel">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+                            class="acc-bg-img" alt="Heavy Manufacturing">
+                        <div class="acc-glass-overlay"></div>
+                        <div class="acc-content">
+                            <div class="acc-header">
+                                <div class="acc-number">02</div>
+                                <h3 class="acc-title">Heavy Manufacturing</h3>
+                            </div>
+                            <div class="acc-hidden-text">
+                                <p>Delivering robust industrial switchgears, motor control centers (MCC), and heavy-duty
+                                    cabling designed to maintain absolute stability in volatile manufacturing environments.
+                                </p>
+                                <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="acc-panel">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
+                            class="acc-bg-img" alt="Commercial Real Estate">
+                        <div class="acc-glass-overlay"></div>
+                        <div class="acc-content">
+                            <div class="acc-header">
+                                <div class="acc-number">03</div>
+                                <h3 class="acc-title">Commercial Infrastructure</h3>
+                            </div>
+                            <div class="acc-hidden-text">
+                                <p>Precision power distribution panels and smart metering solutions engineered for
+                                    large-scale commercial complexes, ensuring efficiency and safety across massive square
+                                    footage.</p>
+                                <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="acc-panel">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+                            class="acc-bg-img" alt="Renewable Energy">
+                        <div class="acc-glass-overlay"></div>
+                        <div class="acc-content">
+                            <div class="acc-header">
+                                <div class="acc-number">04</div>
+                                <h3 class="acc-title">Renewable Integration</h3>
+                            </div>
+                            <div class="acc-hidden-text">
+                                <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie
+                                    large-scale solar arrays and wind farms into existing international power grids.</p>
+                                <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acc-panel">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+                            class="acc-bg-img" alt="Renewable Energy">
+                        <div class="acc-glass-overlay"></div>
+                        <div class="acc-content">
+                            <div class="acc-header">
+                                <div class="acc-number">04</div>
+                                <h3 class="acc-title">Renewable Integration</h3>
+                            </div>
+                            <div class="acc-hidden-text">
+                                <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie
+                                    large-scale solar arrays and wind farms into existing international power grids.</p>
+                                <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acc-panel">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+                            class="acc-bg-img" alt="Renewable Energy">
+                        <div class="acc-glass-overlay"></div>
+                        <div class="acc-content">
+                            <div class="acc-header">
+                                <div class="acc-number">04</div>
+                                <h3 class="acc-title">Renewable Integration</h3>
+                            </div>
+                            <div class="acc-hidden-text">
+                                <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie
+                                    large-scale solar arrays and wind farms into existing international power grids.</p>
+                                <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-energy-blob"></div>
+
+        <div class="cta-container gs-scale-up">
+            <div class="crosshair ch-tl"></div>
+            <div class="crosshair ch-br"></div>
+            <div class="crosshair ch-tr"></div>
+            <div class="crosshair ch-bl"></div>
+
+            <div class="cta-content">
+                <div class="blueprint-tag">
+                    <span class="pulse-dot"></span> INITIATE PROJECT
+                </div>
+
+                <h2 class="cta-headline">Need Reliable Electrical Equipment for Your Project?</h2>
+                <p class="cta-subtext">Bypass the standard supply chain. Partner with DGES for direct manufacturing
+                    access, uncompromising QA, and seamless global export.</p>
+
+                <div class="cta-action-area">
+                    <a href="#" class="btn-mega">
+                        Get a Quotation in 24 Hours
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        ISO Certified Partners
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        End-to-End Export Logistics
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Dedicated Technical Support
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

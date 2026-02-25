@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGES | Engineered Energy Systems</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="grid-overlay"></div>
+
+    <div id="header-placeholder"></div>
+
+
+    <main>
+        <!-- Breadcrumb -->
+        <section class="edge-to-edge-hero">
+        
+            <div class="hero-spanning-line top-line"></div>
+            <!-- <div class="hero-spanning-line bottom-line"></div> -->
+            
+            <div class="hero-particles"></div>
+    
+            <div class="hero-content-wrapper">
+                
+                <div class="tech-breadcrumb-wrapper gs-reveal">
+                    <div class="tech-breadcrumb">
+                        <div class="tech-breadcrumb-bg"></div>
+                        
+                            <ol>
+                                <li>
+                                    <a href="index.html">HOME</a>
+                                </li>
+                                <li class="separator">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+                                </li>
+                                <li aria-current="page" class="current-page">
+                                    ABOUT US
+                                </li>
+                            </ol>
+                    </div>
+                </div>
+    
+                <div class="hero-typography gs-reveal">
+                    <h1 class="hero-mega-title"><span class="gradient-text">ABOUT US</span></h1>
+                    <p class="hero-mega-desc">
+                        Unlock your project's potential with our industry-leading procurement network.<br>
+                        Designed for the <strong>global electrical.</strong>
+                    </p>
+                </div>
+    
+            </div>
+        </section>
+
+        <section class="catalog-section">
+        <div class="terminal-glass-panel gs-fade-up">
+            <div class="crosshair ch-tl"></div>
+            <div class="crosshair ch-br"></div>
+
+            <div class="terminal-sidebar">
+                <div class="sidebar-header">
+                    <h3>Select Category</h3>
+                </div>
+                
+                <button class="cat-btn active" data-target="pane-transformers">
+                    Transformers
+                    <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button class="cat-btn" data-target="pane-switchgears">
+                    Industrial Switchgears
+                    <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button class="cat-btn" data-target="pane-control">
+                    Control Panels (MCC)
+                    <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button class="cat-btn" data-target="pane-renewables">
+                    Renewable Interfaces
+                    <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+
+            <div class="terminal-display">
+                
+                <div id="pane-transformers" class="display-pane active">
+                    <div class="pane-header">
+                        <h2 class="pane-title">Power & Distribution<br>Transformers</h2>
+                        <div class="pane-badge"><span></span> EXPORT READY</div>
+                    </div>
+                    <p class="pane-desc">The backbone of any grid. We supply heavy-duty transformers engineered to handle extreme loads and varied climates. From step-up generation units to compact residential distribution, ensuring maximum efficiency and minimal power loss.</p>
+                    
+                    <div class="product-visual-grid">
+                        <div class="product-image-box">
+                            <div class="img-overlay-grid"></div>
+                            <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=800&auto=format&fit=crop" alt="High Voltage Transformer">
+                        </div>
+                        <div class="product-data-box">
+                            <div class="data-row"><span class="data-label">Capacity Range</span><span class="data-val">Up to 500 MVA</span></div>
+                            <div class="data-row"><span class="data-label">Voltage Class</span><span class="data-val">Up to 400 kV</span></div>
+                            <div class="data-row"><span class="data-label">Cooling Tech</span><span class="data-val">ONAN / ONAF</span></div>
+                            <div class="data-row"><span class="data-label">Compliance</span><span class="data-val">IEC 60076 / IEEE</span></div>
+                        </div>
+                    </div>
+                    <div class="pane-cta">
+                        <a href="#" class="btn-glow">Request Technical Specs</a>
+                        <a href="#" class="btn-outline">Consult an Engineer</a>
+                    </div>
+                </div>
+
+                <div id="pane-switchgears" class="display-pane">
+                    <div class="pane-header">
+                        <h2 class="pane-title">Industrial<br>Switchgears</h2>
+                        <div class="pane-badge"><span></span> EXPORT READY</div>
+                    </div>
+                    <p class="pane-desc">Absolute control over the flow. Our sourced high, medium, and low voltage switchgears ensure that power is routed safely and intelligently to industrial endpoints. Featuring advanced arc-resistant designs for maximum operational safety.</p>
+                    
+                    <div class="product-visual-grid">
+                        <div class="product-image-box">
+                            <div class="img-overlay-grid"></div>
+                            <img src="https://images.unsplash.com/photo-1580983546051-51842eb1bce4?q=80&w=800&auto=format&fit=crop" alt="Industrial Switchgear Panels">
+                        </div>
+                        <div class="product-data-box">
+                            <div class="data-row"><span class="data-label">Voltage Types</span><span class="data-val">HV / MV / LV</span></div>
+                            <div class="data-row"><span class="data-label">Insulation</span><span class="data-val">GIS & AIS</span></div>
+                            <div class="data-row"><span class="data-label">Enclosure</span><span class="data-val">IP55 to IP65</span></div>
+                            <div class="data-row"><span class="data-label">Safety</span><span class="data-val">Arc Flash Rated</span></div>
+                        </div>
+                    </div>
+                    <div class="pane-cta">
+                        <a href="#" class="btn-glow">Request Technical Specs</a>
+                        <a href="#" class="btn-outline">Consult an Engineer</a>
+                    </div>
+                </div>
+
+                <div id="pane-control" class="display-pane">
+                    <div class="pane-header">
+                        <h2 class="pane-title">Motor Control<br>Centers (MCC)</h2>
+                        <div class="pane-badge"><span></span> EXPORT READY</div>
+                    </div>
+                    <p class="pane-desc">The brain of your manufacturing floor. Precision-engineered MCC panels designed to centralize motor control, offering smart diagnostics, variable frequency drives (VFD), and seamless integration with modern SCADA systems.</p>
+                    
+                    <div class="product-visual-grid">
+                        <div class="product-image-box">
+                            <div class="img-overlay-grid"></div>
+                            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop" alt="Motor Control Panels">
+                        </div>
+                        <div class="product-data-box">
+                            <div class="data-row"><span class="data-label">Configuration</span><span class="data-val">Fixed / Draw-out</span></div>
+                            <div class="data-row"><span class="data-label">Integration</span><span class="data-val">PLC / SCADA Ready</span></div>
+                            <div class="data-row"><span class="data-label">Busbar Rating</span><span class="data-val">Up to 4000A</span></div>
+                            <div class="data-row"><span class="data-label">Construction</span><span class="data-val">Form 4b</span></div>
+                        </div>
+                    </div>
+                    <div class="pane-cta">
+                        <a href="#" class="btn-glow">Request Technical Specs</a>
+                        <a href="#" class="btn-outline">Consult an Engineer</a>
+                    </div>
+                </div>
+
+                <div id="pane-renewables" class="display-pane">
+                    <div class="pane-header">
+                        <h2 class="pane-title">Renewable<br>Interfacing</h2>
+                        <div class="pane-badge"><span></span> EXPORT READY</div>
+                    </div>
+                    <p class="pane-desc">Connecting tomorrow's energy today. We supply crucial interfacing equipment—including high-capacity inverters, protection relays, and synchronization panels—required to tie large-scale solar arrays and wind farms into existing national grids.</p>
+                    
+                    <div class="product-visual-grid">
+                        <div class="product-image-box">
+                            <div class="img-overlay-grid"></div>
+                            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop" alt="Renewable Energy Inverters">
+                        </div>
+                        <div class="product-data-box">
+                            <div class="data-row"><span class="data-label">Application</span><span class="data-val">Solar PV / Wind</span></div>
+                            <div class="data-row"><span class="data-label">Inverter Types</span><span class="data-val">Central / String</span></div>
+                            <div class="data-row"><span class="data-label">Grid Sync</span><span class="data-val">Automated Relays</span></div>
+                            <div class="data-row"><span class="data-label">Efficiency</span><span class="data-val">> 98.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="pane-cta">
+                        <a href="#" class="btn-glow">Request Technical Specs</a>
+                        <a href="#" class="btn-outline">Consult an Engineer</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+        
+    </main>
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-energy-blob"></div>
+
+        <div class="cta-container gs-scale-up">
+            <div class="crosshair ch-tl"></div>
+            <div class="crosshair ch-br"></div>
+            <div class="crosshair ch-tr"></div>
+            <div class="crosshair ch-bl"></div>
+
+            <div class="cta-content">
+                <div class="blueprint-tag">
+                    <span class="pulse-dot"></span> INITIATE PROJECT
+                </div>
+
+                <h2 class="cta-headline">Need Reliable Electrical Equipment for Your Project?</h2>
+                <p class="cta-subtext">Bypass the standard supply chain. Partner with DGES for direct manufacturing
+                    access, uncompromising QA, and seamless global export.</p>
+
+                <div class="cta-action-area">
+                    <a href="#" class="btn-mega">
+                        Get a Quotation in 24 Hours
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        ISO Certified Partners
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        End-to-End Export Logistics
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Dedicated Technical Support
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

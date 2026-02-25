@@ -13,6 +13,8 @@
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
@@ -27,22 +29,9 @@
 
     <div class="grid-overlay"></div>
 
-    <nav>
-        <a href="#" class="logo">
-            <svg viewBox="0 0 24 24" fill="var(--dges-orange)" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="var(--dges-orange)" stroke-width="1.5"
-                    stroke-linejoin="round" />
-            </svg>
-            DGES
-        </a>
-        <div class="nav-links">
-            <a href="#">Capabilities</a>
-            <a href="#">Equipment</a>
-            <a href="#">Connect</a>
-        </div>
-    </nav>
+    <div id="header-placeholder"></div>
 
-
+    <!-- Hero Section -->
     <section class="hero">
 
         <div class="floating-img img-1" data-speed="-0.5">
@@ -65,6 +54,7 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section class="premium-about">
         <div class="about-glass-card">
 
@@ -137,6 +127,7 @@
         </div>
     </section>
 
+    <!-- Horizontal Section -->
     <section class="horizontal-section">
         <div class="horizontal-container">
 
@@ -216,6 +207,7 @@
         </div>
     </section>
 
+    <!-- Why Section -->
     <section class="why-section">
         <div class="why-container">
 
@@ -338,9 +330,10 @@
         </div>
     </section>
 
+    <!-- Industries Section -->
     <section class="industries-section">
         <div class="industries-container">
-            
+
             <div class="section-header gs-fade-up">
                 <div class="blueprint-tag">
                     <span class="pulse-dot"></span> SECTOR ALIGNMENT
@@ -351,10 +344,11 @@
             <div class="glass-accordion gs-fade-up">
                 <div class="crosshair ch-tl"></div>
                 <div class="crosshair ch-br"></div>
-                
+
 
                 <div class="acc-panel">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" class="acc-bg-img" alt="Heavy Manufacturing">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+                        class="acc-bg-img" alt="Heavy Manufacturing">
                     <div class="acc-glass-overlay"></div>
                     <div class="acc-content">
                         <div class="acc-header">
@@ -362,13 +356,16 @@
                             <h3 class="acc-title">Heavy Manufacturing</h3>
                         </div>
                         <div class="acc-hidden-text">
-                            <p>Delivering robust industrial switchgears, motor control centers (MCC), and heavy-duty cabling designed to maintain absolute stability in volatile manufacturing environments.</p>
+                            <p>Delivering robust industrial switchgears, motor control centers (MCC), and heavy-duty
+                                cabling designed to maintain absolute stability in volatile manufacturing environments.
+                            </p>
                             <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="acc-panel">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" class="acc-bg-img" alt="Heavy Manufacturing">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop"
+                        class="acc-bg-img" alt="Heavy Manufacturing">
                     <div class="acc-glass-overlay"></div>
                     <div class="acc-content">
                         <div class="acc-header">
@@ -376,14 +373,17 @@
                             <h3 class="acc-title">Heavy Manufacturing</h3>
                         </div>
                         <div class="acc-hidden-text">
-                            <p>Delivering robust industrial switchgears, motor control centers (MCC), and heavy-duty cabling designed to maintain absolute stability in volatile manufacturing environments.</p>
+                            <p>Delivering robust industrial switchgears, motor control centers (MCC), and heavy-duty
+                                cabling designed to maintain absolute stability in volatile manufacturing environments.
+                            </p>
                             <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="acc-panel">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" class="acc-bg-img" alt="Commercial Real Estate">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
+                        class="acc-bg-img" alt="Commercial Real Estate">
                     <div class="acc-glass-overlay"></div>
                     <div class="acc-content">
                         <div class="acc-header">
@@ -391,14 +391,17 @@
                             <h3 class="acc-title">Commercial Infrastructure</h3>
                         </div>
                         <div class="acc-hidden-text">
-                            <p>Precision power distribution panels and smart metering solutions engineered for large-scale commercial complexes, ensuring efficiency and safety across massive square footage.</p>
+                            <p>Precision power distribution panels and smart metering solutions engineered for
+                                large-scale commercial complexes, ensuring efficiency and safety across massive square
+                                footage.</p>
                             <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="acc-panel">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop" class="acc-bg-img" alt="Renewable Energy">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+                        class="acc-bg-img" alt="Renewable Energy">
                     <div class="acc-glass-overlay"></div>
                     <div class="acc-content">
                         <div class="acc-header">
@@ -406,13 +409,15 @@
                             <h3 class="acc-title">Renewable Integration</h3>
                         </div>
                         <div class="acc-hidden-text">
-                            <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie large-scale solar arrays and wind farms into existing international power grids.</p>
+                            <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie
+                                large-scale solar arrays and wind farms into existing international power grids.</p>
                             <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="acc-panel">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop" class="acc-bg-img" alt="Renewable Energy">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+                        class="acc-bg-img" alt="Renewable Energy">
                     <div class="acc-glass-overlay"></div>
                     <div class="acc-content">
                         <div class="acc-header">
@@ -420,13 +425,15 @@
                             <h3 class="acc-title">Renewable Integration</h3>
                         </div>
                         <div class="acc-hidden-text">
-                            <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie large-scale solar arrays and wind farms into existing international power grids.</p>
+                            <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie
+                                large-scale solar arrays and wind farms into existing international power grids.</p>
                             <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="acc-panel">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop" class="acc-bg-img" alt="Renewable Energy">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop"
+                        class="acc-bg-img" alt="Renewable Energy">
                     <div class="acc-glass-overlay"></div>
                     <div class="acc-content">
                         <div class="acc-header">
@@ -434,7 +441,8 @@
                             <h3 class="acc-title">Renewable Integration</h3>
                         </div>
                         <div class="acc-hidden-text">
-                            <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie large-scale solar arrays and wind farms into existing international power grids.</p>
+                            <p>Crucial interfacing equipment, advanced relays, and inverters required to seamlessly tie
+                                large-scale solar arrays and wind farms into existing international power grids.</p>
                             <a href="#" class="explore-link">Explore Sector <span>&rarr;</span></a>
                         </div>
                     </div>
@@ -445,11 +453,146 @@
         </div>
     </section>
 
-    <!-- <section style="height: 100vh; display: flex; align-items: center; justify-content: center;">
-        <h2 style="font-family: 'Space Grotesk'; font-size: 2rem; color: var(--primary-blue);">Next Section Goes Here...
-        </h2>
-    </section> -->
+    <!-- Global Matrix Section -->
+    <section class="global-matrix-section">
+        <div class="global-glass-container gs-scale-up">
+            <div class="crosshair ch-tl"></div>
+            <div class="crosshair ch-br"></div>
 
+            <div class="global-layout">
+
+                <div class="global-text-side">
+                    <div class="blueprint-tag">
+                        <span class="pulse-dot"></span> BORDERLESS LOGISTICS
+                    </div>
+                    <h2 class="global-title">Powering infrastructure across <span>6 Continents.</span></h2>
+                    <p class="global-desc">
+                        Interact with the globe to explore our network. From electrifying commercial hubs in the Middle
+                        East to powering heavy utility grids across Africa and Europe, DGES ensures your equipment
+                        arrives on time, fully compliant, and ready to deploy.
+                    </p>
+
+                    <div class="live-stats">
+                        <div class="stat-block gs-fade-up">
+                            <div class="stat-val">45+</div>
+                            <div class="stat-label">Active Ports</div>
+                        </div>
+                        <div class="stat-block gs-fade-up">
+                            <div class="stat-val">100%</div>
+                            <div class="stat-label">Customs Cleared</div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-glow mt-4 gs-fade-up">
+                        Check Export Capability
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 16 16 12 12 8"></polyline>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="global-map-side">
+                    <div id="globe-canvas-container">
+                        <div id="label-india" class="glass-tag hub-tag">
+                            <div class="tag-status-dot pulse"></div>
+                            <div class="tag-title">India HQ</div>
+                        </div>
+
+                        <div id="label-eu" class="glass-tag">
+                            <div class="tag-status-dot"></div>
+                            <div class="tag-title">Europe</div>
+                        </div>
+
+                        <div id="label-me" class="glass-tag">
+                            <div class="tag-status-dot"></div>
+                            <div class="tag-title">Middle East</div>
+                        </div>
+
+                        <div id="label-af" class="glass-tag">
+                            <div class="tag-status-dot"></div>
+                            <div class="tag-title">Africa</div>
+                        </div>
+
+                        <div id="label-am" class="glass-tag">
+                            <div class="tag-status-dot"></div>
+                            <div class="tag-title">Americas</div>
+                        </div>
+
+                        <div id="label-sa" class="glass-tag">
+                            <div class="tag-status-dot"></div>
+                            <div class="tag-title">SE Asia</div>
+                        </div>
+                    </div>
+                    <div class="interaction-hint gs-fade-up">Drag to Rotate Globe</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-energy-blob"></div>
+
+        <div class="cta-container gs-scale-up">
+            <div class="crosshair ch-tl"></div>
+            <div class="crosshair ch-br"></div>
+            <div class="crosshair ch-tr"></div>
+            <div class="crosshair ch-bl"></div>
+
+            <div class="cta-content">
+                <div class="blueprint-tag">
+                    <span class="pulse-dot"></span> INITIATE PROJECT
+                </div>
+
+                <h2 class="cta-headline">Need Reliable Electrical Equipment for Your Project?</h2>
+                <p class="cta-subtext">Bypass the standard supply chain. Partner with DGES for direct manufacturing
+                    access, uncompromising QA, and seamless global export.</p>
+
+                <div class="cta-action-area">
+                    <a href="#" class="btn-mega">
+                        Get a Quotation in 24 Hours
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        ISO Certified Partners
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        End-to-End Export Logistics
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Dedicated Technical Support
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="assets/js/components.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 
