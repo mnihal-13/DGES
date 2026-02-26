@@ -143,6 +143,33 @@ if (container && panels.length) {
             }
         );
     });
+
+    // --- 6. Velocity Skew on Horizontal Scroll Panels ---
+    let skewProxy = { skew: 0 },
+        skewSetter = gsap.quickSetter(".panel", "skewX", "deg"),
+        clamp = gsap.utils.clamp(-8, 8);
+
+    ScrollTrigger.create({
+        trigger: ".horizontal-section",
+        start: "top top",
+        end: () => "+=" + (container.offsetWidth - window.innerWidth),
+        onUpdate: (self) => {
+            let skew = clamp(self.getVelocity() / -400);
+            if (Math.abs(skew) > Math.abs(skewProxy.skew)) {
+                skewProxy.skew = skew;
+                gsap.to(skewProxy, {
+                    skew: 0,
+                    duration: 0.8,
+                    ease: "power3",
+                    overwrite: true,
+                    onUpdate: () => skewSetter(skewProxy.skew)
+                });
+            }
+        }
+    });
+
+    gsap.set(".panel", { transformOrigin: "center center", force3D: true });
+
 } // end horizontal scroll guard
 
 
