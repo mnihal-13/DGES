@@ -12,6 +12,67 @@ gsap.ticker.lagSmoothing(0);
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ==========================================================
+//   .gs-fade-up     → fade in + slide up
+//   .gs-fade-down   → fade in + slide down
+//   .gs-fade-left   → fade in + slide from left
+//   .gs-fade-right  → fade in + slide from right
+//   .gs-scale-up    → fade in + scale up from 0.9
+//   .gs-reveal      → simple fade in
+//   .gs-stagger     → staggered entrance (children animate in sequence)
+//
+// Optional data attributes:
+//   data-delay="0.3"     → custom delay (seconds)
+//   data-duration="1.2"  → custom duration (seconds)
+//   data-start="top 90%" → custom ScrollTrigger start
+// ==========================================================
+(function initEntranceAnimations() {
+    // Animation presets: [fromVars]
+    const presets = {
+        'gs-fade-up': { y: 50, opacity: 0 },
+        'gs-fade-down': { y: -50, opacity: 0 },
+        'gs-fade-left': { x: -60, opacity: 0 },
+        'gs-fade-right': { x: 60, opacity: 0 },
+        'gs-scale-up': { scale: 0.9, opacity: 0 },
+        'gs-reveal-up': { y: 60, opacity: 0 },
+    };
+
+    // Single-element animations
+    Object.entries(presets).forEach(([className, fromVars]) => {
+        gsap.utils.toArray('.' + className).forEach(el => {
+            gsap.from(el, {
+                ...fromVars,
+                duration: parseFloat(el.dataset.duration) || 1,
+                delay: parseFloat(el.dataset.delay) || 0,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: el.dataset.start || 'top 85%',
+                    once: true,
+                }
+            });
+        });
+    });
+
+    // Staggered group animations — children of .gs-stagger animate in sequence
+    gsap.utils.toArray('.gs-stagger').forEach(container => {
+        const children = container.children;
+        if (!children.length) return;
+        gsap.from(children, {
+            y: 40,
+            opacity: 0,
+            duration: parseFloat(container.dataset.duration) || 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: container,
+                start: container.dataset.start || 'top 85%',
+                once: true,
+            }
+        });
+    });
+})();
+
 // --- 2. Liquid Background Orbit Animation ---
 gsap.to(".blob-1", { x: "15vw", y: "10vh", duration: 15, repeat: -1, yoyo: true, ease: "sine.inOut" });
 gsap.to(".blob-2", { x: "-15vw", y: "-10vh", duration: 18, repeat: -1, yoyo: true, ease: "sine.inOut" });
@@ -700,19 +761,7 @@ if (globeContainer) {
     });
 
     // --- Final CTA Section Animations ---
-
-    // 1. Scale Up Entrance for the CTA Glass Card (scoped to CTA section only)
-    gsap.from(".cta-section .gs-scale-up", {
-        scrollTrigger: {
-            trigger: ".cta-section",
-            start: "top 80%"
-        },
-        scale: 0.9,
-        y: 50,
-        opacity: 0,
-        duration: 1.2,
-        ease: "back.out(1.5)"
-    });
+    // (gs-scale-up entrance now handled by reusable animation system)
 
     // Globe Section Entrance
     gsap.from(".global-glass-container", {
@@ -842,11 +891,15 @@ document.addEventListener('components-loaded', function () {
     });
 
     // Footer GSAP Reveals (re-scan for dynamically loaded elements)
+    // These load async after the reusable system runs, so we need to manually init them
     gsap.utils.toArray('.dges-footer .gs-fade-up').forEach(elem => {
+        if (elem._gsapInit) return; // Skip if already animated
+        elem._gsapInit = true;
         gsap.from(elem, {
             scrollTrigger: {
                 trigger: elem,
                 start: "top 90%",
+                once: true,
             },
             y: 50,
             opacity: 0,
@@ -882,18 +935,7 @@ gsap.to(".hero-content-wrapper", {
     }
 });
 
-
-// --- 1. Container Reveal Animation (GSAP) ---
-gsap.from(".gs-reveal-up", {
-    scrollTrigger: {
-        trigger: ".about-what-we-do",
-        start: "top 80%"
-    },
-    y: 60,
-    opacity: 0,
-    duration: 1.2,
-    ease: "power3.out"
-});
+// (gs-reveal-up / gs-fade-up entrances now handled by reusable animation system)
 
 // --- Counter Animation ---
 const statNumbers = document.querySelectorAll('.stat-number[data-target]');
@@ -1280,54 +1322,101 @@ if (plexusContainer) {
     });
 }
 
-// --- Terminal Container Reveal ---
-        gsap.from(".catalog-section .gs-fade-up", { 
-            scrollTrigger: { 
-                trigger: ".catalog-section", 
-                start: "top 80%" 
-            }, 
-            y: 50, 
-            opacity: 0, 
-            duration: 1.2, 
-            ease: "power3.out" 
+
+
+// --- Interactive Terminal Logic (Tab Switching) ---
+const tabBtns = document.querySelectorAll('.cat-btn');
+const panes = document.querySelectorAll('.display-pane');
+
+// Initialize first pane opacity for GSAP
+gsap.set(panes[0], { opacity: 1, y: 0 });
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Ignore if already active
+        if (btn.classList.contains('active')) return;
+
+        const targetId = btn.getAttribute('data-target');
+        const targetPane = document.getElementById(targetId);
+        const currentPane = document.querySelector('.display-pane.active');
+
+        // 1. Update Button States
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // 2. Animate Out Current Pane
+        gsap.to(currentPane, {
+            opacity: 0,
+            y: -20,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+                currentPane.classList.remove('active');
+
+                // 3. Animate In New Pane
+                targetPane.classList.add('active');
+                gsap.fromTo(targetPane,
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+                );
+            }
         });
+    });
+});
 
-        // --- Interactive Terminal Logic (Tab Switching) ---
-        const tabBtns = document.querySelectorAll('.cat-btn');
-        const panes = document.querySelectorAll('.display-pane');
 
-        // Initialize first pane opacity for GSAP
-        gsap.set(panes[0], { opacity: 1, y: 0 });
 
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Ignore if already active
-                if(btn.classList.contains('active')) return;
+// --- Sticky Sidebar ScrollSpy Logic ---
+const sections = document.querySelectorAll('.product-glass-card');
+const navLinks = document.querySelectorAll('.nav-link');
 
-                const targetId = btn.getAttribute('data-target');
-                const targetPane = document.getElementById(targetId);
-                const currentPane = document.querySelector('.display-pane.active');
+// Options for the Intersection Observer
+const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px', // Triggers when element is in the middle of screen
+    threshold: 0
+};
 
-                // 1. Update Button States
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Remove active from all links
+            navLinks.forEach(link => link.classList.remove('active'));
 
-                // 2. Animate Out Current Pane
-                gsap.to(currentPane, {
-                    opacity: 0,
-                    y: -20,
-                    duration: 0.3,
-                    ease: "power2.in",
-                    onComplete: () => {
-                        currentPane.classList.remove('active');
-                        
-                        // 3. Animate In New Pane
-                        targetPane.classList.add('active');
-                        gsap.fromTo(targetPane, 
-                            { opacity: 0, y: 20 },
-                            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-                        );
-                    }
+            // Add active to the corresponding link
+            const id = entry.target.getAttribute('id');
+            const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    });
+}, observerOptions);
+
+// Observe all product sections
+sections.forEach(section => {
+    observer.observe(section);
+});
+
+// Smooth scroll implementation for sidebar links
+navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            // Use Lenis smooth scroll if active, otherwise fallback to native
+            if (typeof lenis !== 'undefined') {
+                lenis.scrollTo(targetElement, { offset: -120 });
+            } else {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 120,
+                    behavior: 'smooth'
                 });
-            });
-        });
+            }
+        }
+    });
+});
+
+// (gs-fade-up scroll reveals now handled by reusable animation system at top of file)

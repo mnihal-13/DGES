@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGES | Engineered Energy Systems</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="grid-overlay"></div>
+
+    <div id="header-placeholder"></div>
+
+
+    <main>
+        <!-- Breadcrumb -->
+        <section class="edge-to-edge-hero">
+
+            <div class="hero-spanning-line top-line"></div>
+            <!-- <div class="hero-spanning-line bottom-line"></div> -->
+
+            <div class="hero-particles"></div>
+
+            <div class="hero-content-wrapper">
+
+                <div class="tech-breadcrumb-wrapper gs-reveal">
+                    <div class="tech-breadcrumb">
+                        <div class="tech-breadcrumb-bg"></div>
+
+                        <ol>
+                            <li>
+                                <a href="index.html">HOME</a>
+                            </li>
+                            <li class="separator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="13 17 18 12 13 7"></polyline>
+                                    <polyline points="6 17 11 12 6 7"></polyline>
+                                </svg>
+                            </li>
+                            <li aria-current="page" class="current-page">
+                                ABOUT US
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="hero-typography gs-reveal">
+                    <h1 class="hero-mega-title"><span class="gradient-text">ABOUT US</span></h1>
+                    <p class="hero-mega-desc">
+                        Unlock your project's potential with our industry-leading procurement network.<br>
+                        Designed for the <strong>global electrical.</strong>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="qa-vault-section">
+            <div class="vault-container">
+
+                <article class="vault-glass-panel gs-fade-up">
+                    <div class="crosshair ch-tl"></div>
+                    <div class="crosshair ch-br"></div>
+
+                    <div class="vault-layout">
+                        <div class="vault-seal-side">
+                            <div class="seal-ring outer-ring spin-slow"></div>
+                            <div class="seal-ring inner-ring spin-reverse"></div>
+                            <div class="seal-core">
+                                <span class="seal-text">ISO</span>
+                                <span class="seal-sub">9001:2015</span>
+                            </div>
+                            <div class="seal-scanner"></div>
+                        </div>
+
+                        <div class="vault-data-side">
+                            <div class="verified-pill">
+                                <span class="status-dot"></span> AUDIT PASSED
+                            </div>
+                            <h2 class="vault-title">Quality Management Systems</h2>
+                            <p class="vault-desc">DGES partners exclusively with manufacturing floors that maintain
+                                strict ISO 9001:2015 certification. This ensures every phase of production—from raw
+                                copper sourcing to final switchgear assembly—is heavily monitored, documented, and
+                                traceable.</p>
+
+                            <div class="compliance-checklist">
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Full Material Traceability
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Standardized Defect Prevention
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Annual Third-Party Factory Audits
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="vault-glass-panel gs-fade-up">
+                    <div class="crosshair ch-tl"></div>
+                    <div class="crosshair ch-br"></div>
+
+                    <div class="vault-layout reverse-layout">
+                        <div class="vault-data-side">
+                            <div class="verified-pill">
+                                <span class="status-dot"></span> EEA CLEARED
+                            </div>
+                            <h2 class="vault-title">European Conformity (CE)</h2>
+                            <p class="vault-desc">Engineered for the European Economic Area. Equipment bearing the CE
+                                mark has undergone exhaustive testing to verify it meets EU safety, health, and
+                                environmental protection requirements, completely clearing it for continental grid
+                                integration.</p>
+
+                            <div class="compliance-checklist">
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Electromagnetic Compatibility (EMC)
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Low Voltage Directive (LVD) Compliant
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Hazardous Substances Restricted (RoHS)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vault-seal-side">
+                            <div class="seal-ring outer-ring spin-slow"></div>
+                            <div class="seal-ring inner-ring spin-reverse" style="border-color: var(--primary-blue);">
+                            </div>
+                            <div class="seal-core" style="background: var(--primary-blue);">
+                                <span class="seal-text" style="color: white;">CE</span>
+                                <span class="seal-sub" style="color: rgba(255,255,255,0.7);">MARK</span>
+                            </div>
+                            <div class="seal-scanner"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="vault-glass-panel gs-fade-up">
+                    <div class="crosshair ch-tl"></div>
+                    <div class="crosshair ch-br"></div>
+
+                    <div class="vault-layout">
+                        <div class="vault-seal-side">
+                            <div class="seal-ring outer-ring spin-slow"></div>
+                            <div class="seal-ring inner-ring spin-reverse"></div>
+                            <div class="seal-core">
+                                <span class="seal-text">IEC</span>
+                                <span class="seal-sub">GLOBAL</span>
+                            </div>
+                            <div class="seal-scanner"></div>
+                        </div>
+
+                        <div class="vault-data-side">
+                            <div class="verified-pill">
+                                <span class="status-dot"></span> GLOBALLY STANDARDIZED
+                            </div>
+                            <h2 class="vault-title">International Electrotechnical Commission</h2>
+                            <p class="vault-desc">The benchmark for global electrical infrastructure. Our sourced
+                                transformers and switchgears are engineered to IEC parameters, guaranteeing
+                                interoperability, safety, and performance reliability across borders and varying climate
+                                zones.</p>
+
+                            <div class="compliance-checklist">
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    IEC 60076 (Power Transformers)
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    IEC 62271 (High-Voltage Switchgears)
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Rigorous Short-Circuit & Thermal Testing
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="vault-glass-panel gs-fade-up">
+                    <div class="crosshair ch-tl"></div>
+                    <div class="crosshair ch-br"></div>
+
+                    <div class="vault-layout reverse-layout">
+                        <div class="vault-data-side">
+                            <div class="verified-pill">
+                                <span class="status-dot"></span> ORIGIN CERTIFIED
+                            </div>
+                            <h2 class="vault-title">Bureau of Indian Standards (BIS)</h2>
+                            <p class="vault-desc">Capitalizing on India's elite heavy-manufacturing sector requires
+                                strict domestic oversight. The BIS certification guarantees that the raw materials and
+                                structural integrity of the equipment at the source meet the highest possible national
+                                benchmarks before export.</p>
+
+                            <div class="compliance-checklist">
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Raw Copper & Steel Purity Validation
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Domestic Factory Structural Integrity
+                                </div>
+                                <div class="check-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Pre-Export Baseline Clearances
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vault-seal-side">
+                            <div class="seal-ring outer-ring spin-slow"></div>
+                            <div class="seal-ring inner-ring spin-reverse" style="border-color: var(--primary-blue);">
+                            </div>
+                            <div class="seal-core" style="background: var(--primary-blue);">
+                                <span class="seal-text" style="color: white;">BIS</span>
+                                <span class="seal-sub" style="color: rgba(255,255,255,0.7);">INDIA</span>
+                            </div>
+                            <div class="seal-scanner"></div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-energy-blob"></div>
+
+        <div class="cta-container gs-scale-up">
+            <div class="crosshair ch-tl"></div>
+            <div class="crosshair ch-br"></div>
+            <div class="crosshair ch-tr"></div>
+            <div class="crosshair ch-bl"></div>
+
+            <div class="cta-content">
+                <div class="blueprint-tag">
+                    <span class="pulse-dot"></span> INITIATE PROJECT
+                </div>
+
+                <h2 class="cta-headline">Need Reliable Electrical Equipment for Your Project?</h2>
+                <p class="cta-subtext">Bypass the standard supply chain. Partner with DGES for direct manufacturing
+                    access, uncompromising QA, and seamless global export.</p>
+
+                <div class="cta-action-area">
+                    <a href="#" class="btn-mega">
+                        Get a Quotation in 24 Hours
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        ISO Certified Partners
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        End-to-End Export Logistics
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Dedicated Technical Support
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

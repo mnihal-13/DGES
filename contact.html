@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGES | Engineered Energy Systems</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="grid-overlay"></div>
+
+    <div id="header-placeholder"></div>
+
+
+    <main>
+        <!-- Breadcrumb -->
+        <section class="edge-to-edge-hero">
+
+            <div class="hero-spanning-line top-line"></div>
+            <!-- <div class="hero-spanning-line bottom-line"></div> -->
+
+            <div class="hero-particles"></div>
+
+            <div class="hero-content-wrapper">
+
+                <div class="tech-breadcrumb-wrapper gs-reveal">
+                    <div class="tech-breadcrumb">
+                        <div class="tech-breadcrumb-bg"></div>
+
+                        <ol>
+                            <li>
+                                <a href="index.html">HOME</a>
+                            </li>
+                            <li class="separator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="13 17 18 12 13 7"></polyline>
+                                    <polyline points="6 17 11 12 6 7"></polyline>
+                                </svg>
+                            </li>
+                            <li aria-current="page" class="current-page">
+                                ABOUT US
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="hero-typography gs-reveal">
+                    <h1 class="hero-mega-title"><span class="gradient-text">ABOUT US</span></h1>
+                    <p class="hero-mega-desc">
+                        Unlock your project's potential with our industry-leading procurement network.<br>
+                        Designed for the <strong>global electrical.</strong>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="contact-wrapper">
+
+                <!-- Section Header -->
+                <div class="contact-header gs-fade-up">
+                    <div class="blueprint-tag">
+                        <span class="pulse-dot"></span> DIRECT LINE
+                    </div>
+                    <h2 class="contact-mega-title">Get In <span class="gradient-text">Touch.</span></h2>
+                    <p class="contact-subtitle">Reach our export specialists directly. No intermediaries, no delays.</p>
+                </div>
+
+                <!-- Contact Info Cards Row -->
+                <div class="contact-cards-row">
+
+                    <div class="contact-info-card gs-fade-up">
+                        <div class="info-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="info-card-body">
+                            <span class="info-card-label">Primary Facility</span>
+                            <h4 class="info-card-value">DGES Tech Park, Phase 2</h4>
+                            <p class="info-card-detail">Industrial Area, Kerala, India</p>
+                        </div>
+                        <a href="https://maps.google.com" target="_blank" class="info-card-action">
+                            View on Map
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                height="14">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="contact-info-card gs-fade-up" >
+                        <div class="info-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.75.7 2.58a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.83.33 1.7.57 2.58.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="info-card-body">
+                            <span class="info-card-label">Export Hotline (24/7)</span>
+                            <h4 class="info-card-value">+91 98765 43210</h4>
+                            <p class="info-card-detail">Dedicated procurement line</p>
+                        </div>
+                        <a href="tel:+919876543210" class="info-card-action">
+                            Call Now
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                height="14">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="contact-info-card gs-fade-up" >
+                        <div class="info-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="info-card-body">
+                            <span class="info-card-label">Procurement Desk</span>
+                            <h4 class="info-card-value">export@dges-global.com</h4>
+                            <p class="info-card-detail">RFQ & technical inquiries</p>
+                        </div>
+                        <a href="mailto:export@dges-global.com" class="info-card-action">
+                            Send Email
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                height="14">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Form Panel -->
+                <div class="contact-form-panel gs-fade-up">
+                    <div class="crosshair ch-tl"></div>
+                    <div class="crosshair ch-br"></div>
+
+                    <div class="form-panel-grid">
+
+                        <div class="form-panel-left">
+                            <div class="blueprint-tag">
+                                <span class="pulse-dot-small"></span> PROJECT INQUIRY
+                            </div>
+                            <h3 class="form-panel-title">Start Your<br>Export Order.</h3>
+                            <p class="form-panel-desc">Fill in the project parameters and an export specialist will
+                                respond with a detailed quotation within 24 hours.</p>
+
+                            <div class="form-trust-badges">
+                                <div class="trust-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="#00cc66" stroke-width="2" width="18"
+                                        height="18">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    <span>Encrypted & Secure</span>
+                                </div>
+                                <div class="trust-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"
+                                        width="18" height="18">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <span>24h Response Time</span>
+                                </div>
+                                <div class="trust-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"
+                                        width="18" height="18">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                    <span>ISO Certified Partners</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-panel-right">
+                            <form class="terminal-form" id="dgesContactForm">
+
+                                <div class="form-row">
+                                    <div class="input-group">
+                                        <input type="text" id="fullName" required placeholder=" ">
+                                        <label for="fullName">Full Name</label>
+                                        <div class="input-line"></div>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" id="companyName" required placeholder=" ">
+                                        <label for="companyName">Company / Entity</label>
+                                        <div class="input-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="input-group">
+                                        <input type="email" id="emailAdd" required placeholder=" ">
+                                        <label for="emailAdd">Business Email</label>
+                                        <div class="input-line"></div>
+                                    </div>
+                                    <div class="input-group">
+                                        <select id="projectScale" required>
+                                            <option value="" disabled selected></option>
+                                            <option value="commercial">Commercial Development</option>
+                                            <option value="industrial">Heavy Industrial</option>
+                                            <option value="utility">Utility / National Grid</option>
+                                            <option value="renewable">Renewable Array</option>
+                                        </select>
+                                        <label for="projectScale">Project Scale</label>
+                                        <div class="input-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group full-width">
+                                    <textarea id="projectSpecs" rows="4" required placeholder=" "></textarea>
+                                    <label for="projectSpecs">Technical Requirements & Export Destination</label>
+                                    <div class="input-line"></div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-glow submit-btn">
+                                        <span class="btn-text">Submit Inquiry</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
