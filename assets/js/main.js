@@ -560,7 +560,7 @@ if (globeContainer) {
         earthCtx.clearRect(0, 0, earthCanvas.width, earthCanvas.height);
 
         continents.forEach(function (c, idx) {
-            var staggerDelay = idx * 0.04;
+            var staggerDelay = idx * 0;
             var localProgress = Math.max(0, Math.min(1, (progress - staggerDelay) / (1 - staggerDelay * 0.5)));
             if (localProgress <= 0) return;
 

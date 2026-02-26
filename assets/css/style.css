@@ -57,6 +57,15 @@ body {
     background-color: transparent;
 }
 
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+.section-padding {
+    padding: 4rem 5%;
+}
+
 /* --- Liquid Background Layer --- */
 .liquid-bg {
     position: fixed;
@@ -273,10 +282,90 @@ nav {
 }
 
 .hero-desc {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: var(--text-muted);
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+}
+
+/* Hero Badge */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 2.5px;
+    margin-bottom: 1.2rem;
+    padding: 8px 18px;
+    border: 1px solid var(--grid-line);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Hero CTA Button Group */
+.hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+}
+
+.hero-btn-primary {
+    background: var(--primary-blue);
+    color: #fff;
+    border: 2px solid var(--primary-blue);
+    box-shadow: 0 4px 20px rgba(0, 48, 87, 0.2);
+}
+
+.hero-btn-primary:hover {
+    background: var(--accent-amber);
+    border-color: var(--accent-amber);
+    color: var(--primary-blue);
+    box-shadow: 0 8px 30px rgba(243, 145, 31, 0.3);
+    transform: translateY(-2px);
+}
+
+.hero-btn-primary svg {
+    transition: transform 0.3s ease;
+}
+
+.hero-btn-primary:hover svg {
+    transform: translateX(4px);
+}
+
+.hero-btn-secondary {
+    background: transparent;
+    color: var(--primary-blue);
+    border: 2px solid rgba(0, 48, 87, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-btn-secondary:hover {
+    border-color: var(--primary-blue);
+    background: rgba(0, 48, 87, 0.05);
+    transform: translateY(-2px);
 }
 
 /* Floating Hero Images (Glassy Edges) */
@@ -461,13 +550,13 @@ nav {
     max-width: 1600px;
     /* background: rgba(255, 255, 255, 0.4); */
     /* Light glass */
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-right: 1px solid rgba(0, 48, 87, 0.1);
     border-bottom: 1px solid rgba(0, 48, 87, 0.1);
     border-radius: 30px;
-    padding: 6rem 4rem;
+    padding: 4rem 4rem;
     box-shadow: 0 30px 60px rgba(0, 48, 87, 0.05);
     overflow: hidden;
     /* Start slightly scaled down for GSAP reveal */
@@ -517,7 +606,7 @@ nav {
     font-weight: 700;
     color: var(--text-muted);
     letter-spacing: 2px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding: 8px 16px;
     border: 1px solid var(--grid-line);
     border-radius: 50px;
@@ -549,7 +638,7 @@ nav {
 
 .about-headline {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(3rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: -2px;
@@ -564,7 +653,7 @@ nav {
 }
 
 .about-description {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 3.5rem;
@@ -691,7 +780,7 @@ nav {
 /* --- Why DGES Interactive Section --- */
 .why-section {
     position: relative;
-    padding: 8rem 5%;
+    /* padding: 8rem 5%; */
     z-index: 10;
 }
 
@@ -701,12 +790,12 @@ nav {
 }
 
 .why-header {
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 .why-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 700;
     color: var(--primary-blue);
     line-height: 1.1;
@@ -734,7 +823,7 @@ nav {
 .why-item {
     display: flex;
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 16px;
     border: 1px solid transparent;
     cursor: pointer;
@@ -742,6 +831,7 @@ nav {
     /* Glass resting state */
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
+    align-items: center;
 }
 
 .why-item:hover,
@@ -808,7 +898,7 @@ nav {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.4rem;
     color: var(--primary-blue);
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
 }
 
 .item-content p {
@@ -866,7 +956,7 @@ nav {
 
 /* Conversion CTA */
 .cta-wrapper {
-    margin-top: 6rem;
+    margin-top: 2rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -940,7 +1030,7 @@ nav {
 /* --- Industries We Serve Section --- */
 .industries-section {
     position: relative;
-    padding: 8rem 5%;
+    /* padding: 8rem 5%; */
     z-index: 10;
 }
 
@@ -950,7 +1040,7 @@ nav {
 }
 
 .section-header {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -959,7 +1049,7 @@ nav {
 
 .section-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(3rem, 5vw, 3.5rem);
     font-weight: 700;
     color: var(--primary-blue);
     line-height: 1.1;
@@ -973,7 +1063,7 @@ nav {
     height: 600px;
     gap: 10px;
     padding: 10px;
-    background: rgba(248, 249, 250, 0.4);
+    /* background: rgba(248, 249, 250, 0.4); */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--grid-line);
@@ -1165,7 +1255,7 @@ nav {
 /* --- Global Gyro-Map Section --- */
 .global-matrix-section {
     position: relative;
-    padding: 8rem 5%;
+    /* padding: 8rem 5%; */
     z-index: 10;
 }
 
@@ -1180,14 +1270,14 @@ nav {
     border-right: 1px solid rgba(0, 48, 87, 0.1);
     border-bottom: 1px solid rgba(0, 48, 87, 0.1);
     border-radius: 30px;
-    padding: 6rem 4rem;
+    padding: 3rem 4rem;
     box-shadow: 0 40px 80px rgba(0, 48, 87, 0.08);
     overflow: hidden;
 }
 
 .global-layout {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 4rem;
     align-items: center;
 }
@@ -1195,7 +1285,7 @@ nav {
 /* Text & Typography */
 .global-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 4vw, 4rem);
+    font-size: clamp(3rem, 3vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -1.5px;
@@ -1208,7 +1298,7 @@ nav {
 }
 
 .global-desc {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 3rem;
@@ -1370,12 +1460,13 @@ nav {
 /* --- Final Conversion CTA Section --- */
 .cta-section {
     position: relative;
-    padding: 10rem 5%;
+    /* padding: 10rem 5%; */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 99;
     overflow: hidden;
+    margin-bottom: -65px;
 }
 
 /* Targeted glowing blob just for the CTA */
@@ -1405,9 +1496,9 @@ nav {
     border-bottom: 1px solid var(--grid-line);
     border-right: 1px solid var(--grid-line);
     border-radius: 30px;
-    padding: 6rem 3rem;
+    padding: 3rem 3rem;
     text-align: center;
-    box-shadow: 0 40px 80px rgba(0, 48, 87, 0.08);
+    /* box-shadow: 0 40px 80px rgba(0, 48, 87, 0.08); */
     z-index: 2;
 }
 
@@ -1432,7 +1523,7 @@ nav {
 
 .cta-headline {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-size: clamp(2.5rem, 3vw, 3.5rem);
     font-weight: 700;
     color: var(--primary-blue);
     line-height: 1.1;

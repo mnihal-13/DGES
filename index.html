@@ -35,22 +35,35 @@
     <section class="hero">
 
         <div class="floating-img img-1" data-speed="-0.5">
-            <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=800&auto=format&fit=crop"
-                alt="Transformer Details">
+            <img src="assets/images/products/hero-transformer.png" alt="Transformer Details">
         </div>
         <div class="floating-img img-2" data-speed="0.8">
-            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop"
-                alt="Control Panels">
+            <img src="assets/images/products/hero-control-panel.png" alt="Control Panels">
         </div>
         <div class="floating-img img-3" data-speed="-0.2">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop"
-                alt="Renewables">
+            <img src="assets/images/products/hero-power-grid.png" alt="Power Grid Infrastructure">
         </div>
 
         <div class="hero-text-wrapper">
+            <div class="hero-badge hero-anim">
+                <span class="pulse-dot"></span> GLOBAL ELECTRICAL EXPORTS
+            </div>
             <h1 class="hero-title hero-anim">POWERING<br>THE GLOBE.</h1>
-            <p class="hero-desc hero-anim">Architects of international energy infrastructure. Sourcing the highest grade
-                electrical components from India for worldwide deployment.</p>
+            <p class="hero-desc hero-anim">India's premier export partner for heavy-duty electrical infrastructure —
+                Transformers, Switchgears, Cables & Energy Storage Systems deployed across 6 continents.</p>
+            <div class="hero-cta-group hero-anim">
+                <a href="contact.html" class="hero-btn hero-btn-primary">
+                    Get a Quote
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="equipment.html" class="hero-btn hero-btn-secondary">
+                    Explore Products
+                </a>
+            </div>
         </div>
     </section>
 
@@ -99,14 +112,12 @@
                 <div class="about-visual-cluster">
 
                     <div class="cluster-img main-img cluster-anim" data-speed="0.05">
-                        <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=800&auto=format&fit=crop"
-                            alt="Power Grid">
+                        <img src="assets/images/transformer-export.png" alt="Power Grid">
                         <div class="glass-overlay-label">HIGH VOLTAGE</div>
                     </div>
 
                     <div class="cluster-img sub-img-1 cluster-anim" data-speed="-0.1">
-                        <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=800&auto=format&fit=crop"
-                            alt="Transformers">
+                        <img src="assets/images/switchgear-panel.png" alt="Transformers">
                     </div>
 
                     <div class="rotating-blueprint cluster-anim" data-speed="0.15">
@@ -128,42 +139,24 @@
     </section>
 
     <!-- Horizontal Section -->
-    <section class="horizontal-section">
+    <!-- <section class="horizontal-section">
         <div class="horizontal-container">
 
             <div class="panel">
                 <div class="panel-content">
                     <div class="panel-text">
-                        <div class="panel-number">PHASE 01 / SOURCING</div>
-                        <h2 class="panel-title">Precision Manufactured.</h2>
-                        <p class="panel-desc">We bypass the standard supply chain. DGES partners directly with top-tier
-                            Indian manufacturers, securing heavy-duty electrical components engineered to exact
-                            international ISO specifications. From raw copper to finalized switchgears, quality is
-                            non-negotiable.</p>
-                    </div>
-                    <div class="panel-image-wrapper">
-                        <div class="crosshair ch-tl"></div>
-                        <div class="crosshair ch-br"></div>
-                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop"
-                            class="horiz-img" alt="Manufacturing">
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel">
-                <div class="panel-content">
-                    <div class="panel-text">
-                        <div class="panel-number">PHASE 02 / TRANSMISSION</div>
+                        <div class="panel-number">01 / DISTRIBUTION TRANSFORMERS</div>
                         <h2 class="panel-title">High-Capacity Transformers.</h2>
                         <p class="panel-desc">The backbone of any grid. We supply distribution and power transformers
-                            built to handle extreme loads and varied climates. Designed for maximum efficiency and
-                            minimum loss, keeping global energy moving seamlessly.</p>
+                            engineered to handle extreme loads and diverse climatic conditions. Built for maximum
+                            efficiency with minimum core losses — keeping global energy infrastructure moving
+                            seamlessly from substation to endpoint.</p>
                     </div>
                     <div class="panel-image-wrapper">
                         <div class="crosshair ch-tl"></div>
                         <div class="crosshair ch-br"></div>
-                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop"
-                            class="horiz-img" alt="High Voltage Substation">
+                        <img src="assets/images/products/distribution-transformer.png" class="horiz-img"
+                            alt="Distribution Transformer">
                     </div>
                 </div>
             </div>
@@ -171,17 +164,18 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="panel-text">
-                        <div class="panel-number">PHASE 03 / DISTRIBUTION</div>
-                        <h2 class="panel-title">Industrial Switchgears.</h2>
-                        <p class="panel-desc">Absolute control over the flow. Our sourced industrial panels, relays, and
-                            heavy-duty cabling ensure that power is routed safely and intelligently to residential,
-                            commercial, and industrial endpoints.</p>
+                        <div class="panel-number">02 / INSTRUMENT TRANSFORMERS</div>
+                        <h2 class="panel-title">Precision Measurement.</h2>
+                        <p class="panel-desc">Current transformers and voltage transformers built for accuracy at scale.
+                            Our instrument transformers enable reliable metering, protection, and control across
+                            high-voltage networks — ensuring operators maintain complete visibility
+                            over every watt flowing through the grid.</p>
                     </div>
                     <div class="panel-image-wrapper">
                         <div class="crosshair ch-tl"></div>
                         <div class="crosshair ch-br"></div>
-                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop"
-                            class="horiz-img" alt="Switchgear Panels">
+                        <img src="assets/images/products/instrument-transformers.png" class="horiz-img"
+                            alt="Instrument Transformers">
                     </div>
                 </div>
             </div>
@@ -189,33 +183,112 @@
             <div class="panel">
                 <div class="panel-content">
                     <div class="panel-text">
-                        <div class="panel-number">PHASE 04 / RENEWABLE</div>
-                        <h2 class="panel-title">Sustainable Integration.</h2>
-                        <p class="panel-desc">Connecting tomorrow's energy today. We supply the crucial interfacing
-                            equipment required to tie large-scale solar arrays and wind farms into existing
-                            international power grids.</p>
+                        <div class="panel-number">03 / CABLES & CONDUCTORS</div>
+                        <h2 class="panel-title">Heavy-Duty Cabling.</h2>
+                        <p class="panel-desc">From high-voltage power cables to armoured conductors, we source and
+                            supply
+                            the full spectrum of industrial-grade cabling. Multi-core, XLPE insulated, and rated
+                            for the harshest conditions — delivering reliable power transmission from
+                            generation point to final distribution.</p>
                     </div>
                     <div class="panel-image-wrapper">
                         <div class="crosshair ch-tl"></div>
                         <div class="crosshair ch-br"></div>
-                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1200&auto=format&fit=crop"
-                            class="horiz-img" alt="Wind Turbines">
+                        <img src="assets/images/products/industrial-cables.png" class="horiz-img"
+                            alt="Industrial Cables & Conductors">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">04 / BATTERY ENERGY STORAGE</div>
+                        <h2 class="panel-title">Grid-Scale Storage.</h2>
+                        <p class="panel-desc">Bridging generation and demand. We supply complete Battery Energy Storage
+                            Systems
+                            (BESS) engineered for utility-scale deployment. Lithium-ion and advanced chemistries
+                            that enable peak shaving, frequency regulation, and seamless renewable
+                            integration into existing power infrastructure.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="assets/images/products/battery-storage.png" class="horiz-img"
+                            alt="Battery Energy Storage System">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">05 / INDUSTRIAL RELAYS</div>
+                        <h2 class="panel-title">Intelligent Protection.</h2>
+                        <p class="panel-desc">From control relays to high-capacity power relays for AC and DC loads.
+                            Our relay portfolio covers latching, ratchet, I/O, and terminal configurations —
+                            providing the critical switching intelligence that safeguards electrical circuits
+                            and automates industrial control systems worldwide.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="assets/images/products/industrial-relays.png" class="horiz-img"
+                            alt="Industrial Relays">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">06 / METERS & INDICATORS</div>
+                        <h2 class="panel-title">Complete Visibility.</h2>
+                        <p class="panel-desc">Precision analog and digital panel meters, ammeters, voltmeters,
+                            and LED indicator lights. Our metering solutions deliver real-time electrical
+                            parameter monitoring — giving operators instant, accurate insight into
+                            current, voltage, and system health at every distribution point.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="assets/images/products/electrical-meters.png" class="horiz-img"
+                            alt="Meters & Indicators">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="panel-text">
+                        <div class="panel-number">07 / INDUSTRIAL SWITCHES</div>
+                        <h2 class="panel-title">Total Control.</h2>
+                        <p class="panel-desc">Toggle, rotary, push-button, rocker, DIP, and solid-state switches
+                            built for industrial-grade durability. From micro-switches to heavy-duty cam switches —
+                            every actuation point engineered for millions of cycles in the most
+                            demanding operational environments.</p>
+                    </div>
+                    <div class="panel-image-wrapper">
+                        <div class="crosshair ch-tl"></div>
+                        <div class="crosshair ch-br"></div>
+                        <img src="assets/images/products/industrial-switches.png" class="horiz-img"
+                            alt="Industrial Switches">
                     </div>
                 </div>
             </div>
 
         </div>
-    </section>
+    </section> -->
 
     <!-- Why Section -->
-    <section class="why-section">
+    <section class="why-section section-padding">
         <div class="why-container">
 
-            <div class="why-header gs-fade-up">
+            <div class="section-header gs-fade-up ">
                 <div class="blueprint-tag">
                     <span class="pulse-dot"></span> THE DGES ADVANTAGE
                 </div>
-                <h2 class="why-title">Not Resellers.<br><span>Export Specialists.</span></h2>
+                <h2 class="why-title">Not Resellers. <span>Export Specialists.</span></h2>
             </div>
 
             <div class="why-dashboard gs-fade-up">
@@ -331,7 +404,7 @@
     </section>
 
     <!-- Industries Section -->
-    <section class="industries-section">
+    <section class="industries-section section-padding">
         <div class="industries-container">
 
             <div class="section-header gs-fade-up">
@@ -454,7 +527,7 @@
     </section>
 
     <!-- Global Matrix Section -->
-    <section class="global-matrix-section">
+    <section class="global-matrix-section section-padding">
         <div class="global-glass-container">
             <div class="crosshair ch-tl"></div>
             <div class="crosshair ch-br"></div>
@@ -465,7 +538,7 @@
                     <div class="blueprint-tag">
                         <span class="pulse-dot"></span> BORDERLESS LOGISTICS
                     </div>
-                    <h2 class="global-title">Powering infrastructure across <span>6 Continents.</span></h2>
+                    <h2 class="global-title">Powering infrastructure across <span>Continents.</span></h2>
                     <p class="global-desc">
                         Interact with the globe to explore our network. From electrifying commercial hubs in the Middle
                         East to powering heavy utility grids across Africa and Europe, DGES ensures your equipment
@@ -534,7 +607,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="cta-section section-padding">
         <div class="cta-energy-blob"></div>
 
         <div class="cta-container gs-scale-up">
