@@ -1,4 +1,4 @@
-const lenis = new Lenis({
+﻿const lenis = new Lenis({
     duration: 1.5,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     direction: 'vertical',
@@ -13,18 +13,18 @@ gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
 // ==========================================================
-//   .gs-fade-up     → fade in + slide up
-//   .gs-fade-down   → fade in + slide down
-//   .gs-fade-left   → fade in + slide from left
-//   .gs-fade-right  → fade in + slide from right
-//   .gs-scale-up    → fade in + scale up from 0.9
-//   .gs-reveal      → simple fade in
-//   .gs-stagger     → staggered entrance (children animate in sequence)
+//   .gs-fade-up     â†’ fade in + slide up
+//   .gs-fade-down   â†’ fade in + slide down
+//   .gs-fade-left   â†’ fade in + slide from left
+//   .gs-fade-right  â†’ fade in + slide from right
+//   .gs-scale-up    â†’ fade in + scale up from 0.9
+//   .gs-reveal      â†’ simple fade in
+//   .gs-stagger     â†’ staggered entrance (children animate in sequence)
 //
 // Optional data attributes:
-//   data-delay="0.3"     → custom delay (seconds)
-//   data-duration="1.2"  → custom duration (seconds)
-//   data-start="top 90%" → custom ScrollTrigger start
+//   data-delay="0.3"     â†’ custom delay (seconds)
+//   data-duration="1.2"  â†’ custom duration (seconds)
+//   data-start="top 90%" â†’ custom ScrollTrigger start
 // ==========================================================
 (function initEntranceAnimations() {
     // Animation presets: [fromVars]
@@ -54,7 +54,7 @@ gsap.registerPlugin(ScrollTrigger);
         });
     });
 
-    // Staggered group animations — children of .gs-stagger animate in sequence
+    // Staggered group animations â€” children of .gs-stagger animate in sequence
     gsap.utils.toArray('.gs-stagger').forEach(container => {
         const children = container.children;
         if (!children.length) return;
@@ -110,6 +110,340 @@ floatingImages.forEach(img => {
         }
     });
 });
+
+// --- 1. HERO REVEAL ANIMATIONS (GSAP) ---
+gsap.from(".gs-hero-reveal", {
+    y: 50, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power3.out", delay: 0.2
+});
+
+// --- 2. THE TRANSFORMER (Three.js) ---
+const turbineCanvas = document.getElementById('turbine-canvas');
+
+if (turbineCanvas) {
+    const scene = new THREE.Scene();
+
+    // Camera Setup
+    const camera = new THREE.PerspectiveCamera(35, turbineCanvas.offsetWidth / turbineCanvas.offsetHeight, 0.1, 1000);
+    camera.position.set(5, 5, 22);
+    camera.lookAt(0, 0.5, 0);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(turbineCanvas.offsetWidth, turbineCanvas.offsetHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    turbineCanvas.appendChild(renderer.domElement);
+
+    // --- LIGHTING ---
+    const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
+    scene.add(ambientLight);
+    const hemiLight = new THREE.HemisphereLight(0x8899bb, 0x222233, 0.4);
+    scene.add(hemiLight);
+    const keyLight = new THREE.DirectionalLight(0xffeedd, 1.0);
+    keyLight.position.set(6, 8, 5); keyLight.castShadow = true;
+    scene.add(keyLight);
+    const rimLight = new THREE.PointLight(0xF3911F, 1.5, 30);
+    rimLight.position.set(-6, 4, -3);
+    scene.add(rimLight);
+    const fillLight = new THREE.PointLight(0x4488cc, 1.2, 25);
+    fillLight.position.set(5, 2, 8);
+    scene.add(fillLight);
+    const underLight = new THREE.PointLight(0xF3911F, 0.6, 15);
+    underLight.position.set(0, -2, 0);
+    scene.add(underLight);
+
+    // --- MATERIALS ---
+    const tankMat = new THREE.MeshStandardMaterial({ color: 0x2a3040, roughness: 0.5, metalness: 0.7 });
+    const darkSteelMat = new THREE.MeshStandardMaterial({ color: 0x1e2530, roughness: 0.4, metalness: 0.8 });
+    const steelMat = new THREE.MeshStandardMaterial({ color: 0x4a5568, roughness: 0.35, metalness: 0.8 });
+    const finMat = new THREE.MeshStandardMaterial({ color: 0x3a4555, roughness: 0.45, metalness: 0.7 });
+    const copperMat = new THREE.MeshStandardMaterial({ color: 0xb87333, roughness: 0.3, metalness: 0.75 });
+    const ceramicMat = new THREE.MeshStandardMaterial({ color: 0x8a7e6a, roughness: 0.65, metalness: 0.1 });
+    const amberMat = new THREE.MeshStandardMaterial({ color: 0xF3911F, roughness: 0.4, metalness: 0.5, emissive: 0xF3911F, emissiveIntensity: 0.15 });
+    const baseMat2 = new THREE.MeshStandardMaterial({ color: 0x1a1e28, roughness: 0.6, metalness: 0.7 });
+
+    const transformerGroup = new THREE.Group();
+    scene.add(transformerGroup);
+
+    // === 1. BASE FRAME ===
+    const baseGroup = new THREE.Group();
+    const bGeo = new THREE.BoxGeometry(5.8, 0.25, 4.2);
+    const bMesh = new THREE.Mesh(bGeo, baseMat2);
+    bMesh.position.y = -2.1; bMesh.castShadow = true;
+    baseGroup.add(bMesh);
+    for (let i = -1; i <= 1; i += 2) {
+        const rGeo = new THREE.BoxGeometry(6.2, 0.3, 0.3);
+        const rail = new THREE.Mesh(rGeo, darkSteelMat);
+        rail.position.set(0, -2.35, i * 1.6);
+        baseGroup.add(rail);
+    }
+    transformerGroup.add(baseGroup);
+
+    // === 2. MAIN TANK ===
+    const tankGroup = new THREE.Group();
+    const tGeo = new THREE.BoxGeometry(4.5, 4.0, 3.2);
+    const tMesh = new THREE.Mesh(tGeo, tankMat);
+    tMesh.castShadow = true; tMesh.receiveShadow = true;
+    tankGroup.add(tMesh);
+    transformerGroup.add(tankGroup);
+
+    // === 3. STRUCTURAL BRACES ===
+    const bracesGroup = new THREE.Group();
+    for (let i = 0; i < 3; i++) {
+        const hbGeo = new THREE.BoxGeometry(4.7, 0.12, 0.15);
+        const hb = new THREE.Mesh(hbGeo, darkSteelMat);
+        hb.position.set(0, -1.2 + (i * 1.2), 1.63);
+        bracesGroup.add(hb);
+        const hbB = hb.clone(); hbB.position.z = -1.63;
+        bracesGroup.add(hbB);
+    }
+    for (let i = -1; i <= 1; i += 2) {
+        const vbGeo = new THREE.BoxGeometry(0.12, 4.2, 0.15);
+        const vb = new THREE.Mesh(vbGeo, darkSteelMat);
+        vb.position.set(i * 1.5, 0, 1.63);
+        bracesGroup.add(vb);
+        const vbB = vb.clone(); vbB.position.z = -1.63;
+        bracesGroup.add(vbB);
+    }
+    transformerGroup.add(bracesGroup);
+
+    // === 4. RADIATOR PANELS ===
+    function makeRadPanel(w, h, fc, pos, ry) {
+        const pg = new THREE.Group();
+        const fw = w / fc;
+        for (let i = 0; i < fc; i++) {
+            const fg = new THREE.BoxGeometry(fw * 0.7, h, 0.06);
+            const f = new THREE.Mesh(fg, finMat);
+            f.position.x = -w / 2 + fw / 2 + (i * fw);
+            pg.add(f);
+        }
+        const ppG = new THREE.CylinderGeometry(0.08, 0.08, w + 0.2, 8);
+        ppG.rotateZ(Math.PI / 2);
+        const tp = new THREE.Mesh(ppG, steelMat); tp.position.y = h / 2; pg.add(tp);
+        const bp = tp.clone(); bp.position.y = -h / 2; pg.add(bp);
+        pg.position.copy(pos); pg.rotation.y = ry || 0;
+        return pg;
+    }
+    const rFL = makeRadPanel(1.6, 3.4, 12, new THREE.Vector3(-0.9, 0, 1.9), 0);
+    const rFR = makeRadPanel(1.6, 3.4, 12, new THREE.Vector3(0.9, 0, 1.9), 0);
+    const rBL = makeRadPanel(1.6, 3.4, 12, new THREE.Vector3(-0.9, 0, -1.9), 0);
+    const rBR = makeRadPanel(1.6, 3.4, 12, new THREE.Vector3(0.9, 0, -1.9), 0);
+    const rSR = makeRadPanel(1.2, 3.4, 10, new THREE.Vector3(2.5, 0, 0), Math.PI / 2);
+    const rSL = makeRadPanel(1.2, 3.4, 10, new THREE.Vector3(-2.5, 0, 0), Math.PI / 2);
+    [rFL, rFR, rBL, rBR, rSR, rSL].forEach(function (r) { transformerGroup.add(r); });
+
+    // === 5. TOP PLATE ===
+    const topPG = new THREE.Group();
+    const tpGeo = new THREE.BoxGeometry(4.8, 0.15, 3.5);
+    const tpM = new THREE.Mesh(tpGeo, darkSteelMat);
+    tpM.position.y = 2.05; topPG.add(tpM);
+    transformerGroup.add(topPG);
+
+    // === 6. BUSHINGS ===
+    function makeBushing(ht, dc, pos) {
+        const bg = new THREE.Group();
+        const rg = new THREE.CylinderGeometry(0.06, 0.06, ht, 8);
+        const rd = new THREE.Mesh(rg, copperMat); rd.position.y = ht / 2; bg.add(rd);
+        const sp = ht / (dc + 1);
+        for (let j = 0; j < dc; j++) {
+            const dg = new THREE.CylinderGeometry(0.18, 0.24, 0.1, 12);
+            const dm = new THREE.Mesh(dg, ceramicMat); dm.position.y = sp * (j + 1); bg.add(dm);
+            const sg = new THREE.CylinderGeometry(0.12, 0.12, 0.04, 12);
+            const sm = new THREE.Mesh(sg, steelMat); sm.position.y = sp * (j + 1) + 0.07; bg.add(sm);
+        }
+        const cg = new THREE.CylinderGeometry(0.1, 0.14, 0.15, 8);
+        const cm = new THREE.Mesh(cg, steelMat); cm.position.y = ht; bg.add(cm);
+        const fg = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 12);
+        const fm = new THREE.Mesh(fg, darkSteelMat); bg.add(fm);
+        bg.position.copy(pos);
+        return bg;
+    }
+    const bushGrp = new THREE.Group();
+    bushGrp.add(makeBushing(2.8, 6, new THREE.Vector3(-1.0, 2.1, -0.4)));
+    bushGrp.add(makeBushing(2.8, 6, new THREE.Vector3(0, 2.1, -0.4)));
+    bushGrp.add(makeBushing(2.8, 6, new THREE.Vector3(1.0, 2.1, -0.4)));
+    bushGrp.add(makeBushing(1.6, 3, new THREE.Vector3(-0.6, 2.1, 0.6)));
+    bushGrp.add(makeBushing(1.6, 3, new THREE.Vector3(0.6, 2.1, 0.6)));
+    transformerGroup.add(bushGrp);
+
+    // === 7. CONSERVATOR ===
+    const consGrp = new THREE.Group();
+    const ccG = new THREE.CylinderGeometry(0.4, 0.4, 2.8, 16); ccG.rotateZ(Math.PI / 2);
+    consGrp.add(new THREE.Mesh(ccG, steelMat));
+    const ecG = new THREE.SphereGeometry(0.4, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+    const eL = new THREE.Mesh(ecG, steelMat); eL.rotation.z = Math.PI / 2; eL.position.x = 1.4; consGrp.add(eL);
+    const eR = new THREE.Mesh(ecG, steelMat); eR.rotation.z = -Math.PI / 2; eR.position.x = -1.4; consGrp.add(eR);
+    const gg = new THREE.CylinderGeometry(0.08, 0.08, 0.5, 8);
+    const gm = new THREE.Mesh(gg, amberMat); gm.position.set(0.8, 0.45, 0); consGrp.add(gm);
+    const bkg = new THREE.CylinderGeometry(0.06, 0.06, 1.2, 8);
+    const bk1 = new THREE.Mesh(bkg, darkSteelMat); bk1.position.set(0.5, -0.7, 0); consGrp.add(bk1);
+    const bk2 = bk1.clone(); bk2.position.x = -0.5; consGrp.add(bk2);
+    consGrp.position.set(1.8, 3.5, -0.8);
+    transformerGroup.add(consGrp);
+
+    // === 8. CABLES ===
+    const cblGrp = new THREE.Group();
+    const cblMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 0.7, metalness: 0.4 });
+    for (let i = -1; i <= 1; i++) {
+        const pts = [];
+        for (let t = 0; t <= 10; t++) {
+            const f = t / 10;
+            pts.push(new THREE.Vector3(i * 1.0 + Math.sin(f * 1.5) * 0.3, 4.9 + f * 2.5 + Math.sin(f * Math.PI) * 0.8, -0.4 - f * 0.5));
+        }
+        const cv = new THREE.CatmullRomCurve3(pts);
+        cblGrp.add(new THREE.Mesh(new THREE.TubeGeometry(cv, 20, 0.04, 8, false), cblMat));
+    }
+    transformerGroup.add(cblGrp);
+
+    // === 9. NAMEPLATE ===
+    const npGrp = new THREE.Group();
+    const npG = new THREE.BoxGeometry(0.8, 0.5, 0.02);
+    const npM = new THREE.Mesh(npG, amberMat); npM.position.set(0, -0.5, 1.65);
+    npGrp.add(npM);
+    transformerGroup.add(npGrp);
+
+    // Initial rotation
+    transformerGroup.rotation.y = -0.6;
+
+    // =============================================
+    // ASSEMBLY ANIMATION + SCROLL DISASSEMBLY
+    // =============================================
+    var asmParts = [
+        { g: baseGroup, ox: 0, oy: -8, oz: 0, d: 0 },
+        { g: tankGroup, ox: 0, oy: 10, oz: 0, d: 0.4 },
+        { g: bracesGroup, ox: -8, oy: 0, oz: -5, d: 0.9 },
+        { g: rFL, ox: 0, oy: 0, oz: 6, d: 1.2 },
+        { g: rFR, ox: 0, oy: 0, oz: 6, d: 1.35 },
+        { g: rBL, ox: 0, oy: 0, oz: -6, d: 1.5 },
+        { g: rBR, ox: 0, oy: 0, oz: -6, d: 1.65 },
+        { g: rSR, ox: 6, oy: 0, oz: 0, d: 1.8 },
+        { g: rSL, ox: -6, oy: 0, oz: 0, d: 1.95 },
+        { g: topPG, ox: 0, oy: 8, oz: 0, d: 2.3 },
+        { g: bushGrp, ox: 0, oy: -6, oz: 0, d: 2.7 },
+        { g: consGrp, ox: 8, oy: 4, oz: 0, d: 3.1 },
+        { g: cblGrp, ox: 0, oy: 12, oz: 0, d: 3.5 },
+        { g: npGrp, ox: 0, oy: 0, oz: 4, d: 3.9 }
+    ];
+
+    // Save final (assembled) positions
+    var asmFinals = [];
+    for (var ai = 0; ai < asmParts.length; ai++) {
+        var ap = asmParts[ai];
+        asmFinals.push({ x: ap.g.position.x, y: ap.g.position.y, z: ap.g.position.z });
+        ap.g.position.x += ap.ox;
+        ap.g.position.y += ap.oy;
+        ap.g.position.z += ap.oz;
+        ap.g.scale.set(0.01, 0.01, 0.01);
+    }
+
+    // --- PHASE 1: Initial load assembly timeline ---
+    var assemblyDone = false;
+    var asmTL = gsap.timeline({
+        delay: 0.5,
+        onComplete: function () {
+            assemblyDone = true;
+            setupScrollDisassembly(); // After load animation, activate scroll behavior
+        }
+    });
+
+    for (var ti = 0; ti < asmParts.length; ti++) {
+        (function (idx) {
+            var p = asmParts[idx];
+            var f = asmFinals[idx];
+            asmTL.to(p.g.position, { x: f.x, y: f.y, z: f.z, duration: 0.8, ease: "power3.out" }, p.d);
+            asmTL.to(p.g.scale, { x: 1, y: 1, z: 1, duration: 0.6, ease: "back.out(1.4)" }, p.d);
+        })(ti);
+    }
+
+    // --- PHASE 2: Scroll-triggered disassembly/reassembly ---
+    function setupScrollDisassembly() {
+        var heroSection = document.querySelector('.turbine-hero-section');
+        if (!heroSection) return;
+
+        // Build a scrubbed timeline: assembled (progress=0) → disassembled (progress=1)
+        var scrollTL = gsap.timeline({
+            scrollTrigger: {
+                trigger: heroSection,
+                start: "top top",       // start when hero hits viewport top
+                end: "bottom top",      // end when hero bottom passes viewport top
+                scrub: 0.9,             // smooth scrub lag
+                onUpdate: function (self) {
+                    // Disable mouse parallax when disassembled
+                    assemblyDone = self.progress < 0.5;
+                }
+            }
+        });
+
+        // Animate each part FROM assembled TO offset (disassembly on scroll)
+        for (var si = 0; si < asmParts.length; si++) {
+            (function (idx) {
+                var p = asmParts[idx];
+                var f = asmFinals[idx];
+                // Disassemble: move to offset positions
+                scrollTL.to(p.g.position, {
+                    x: f.x + p.ox * 0.6,
+                    y: f.y + p.oy * 0.6,
+                    z: f.z + p.oz * 0.6,
+                    duration: 1,
+                    ease: "power2.inOut"
+                }, idx * 0.04); // slight stagger
+
+                scrollTL.to(p.g.scale, {
+                    x: 0.6, y: 0.6, z: 0.6,
+                    duration: 1,
+                    ease: "power2.inOut"
+                }, idx * 0.04);
+            })(si);
+        }
+
+        // Also rotate the whole group slightly as it disassembles
+        scrollTL.to(transformerGroup.rotation, {
+            y: -1.2,
+            duration: 1,
+            ease: "power2.inOut"
+        }, 0);
+    }
+
+    // --- INTERACTION ---
+    var mX = 0, mY = 0;
+    document.addEventListener('mousemove', function (e) {
+        mX = (e.clientX - window.innerWidth / 2) * 0.0008;
+        mY = (e.clientY - window.innerHeight / 2) * 0.0004;
+    });
+
+    var clk = new THREE.Clock();
+
+    function animateTransformer() {
+        requestAnimationFrame(animateTransformer);
+        var el = clk.getElapsedTime();
+
+        if (assemblyDone) {
+            var ty = -0.6 + (mX * 0.5);
+            var tx = mY * 0.3;
+            transformerGroup.rotation.y += (ty - transformerGroup.rotation.y) * 0.04;
+            transformerGroup.rotation.x += (tx - transformerGroup.rotation.x) * 0.04;
+            transformerGroup.position.y = Math.sin(el * 0.6) * 0.08;
+        }
+
+        rimLight.intensity = 1.5 + Math.sin(el * 1.5) * 0.4;
+        underLight.intensity = 0.6 + Math.sin(el * 2) * 0.2;
+        renderer.render(scene, camera);
+    }
+
+    animateTransformer();
+
+    window.addEventListener('resize', function () {
+        if (!turbineCanvas) return;
+        camera.aspect = turbineCanvas.offsetWidth / turbineCanvas.offsetHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(turbineCanvas.offsetWidth, turbineCanvas.offsetHeight);
+    });
+}
+
+
+
 
 // --- 4. The Stunning Horizontal Scroll Effect ---
 const container = document.querySelector(".horizontal-container");
@@ -556,7 +890,7 @@ if (globeContainer) {
         return len;
     }
 
-    // Draw earth with animation progress (0→1)
+    // Draw earth with animation progress (0â†’1)
     const globeAnimState = { progress: 0 };
 
     function drawEarth(progress) {
@@ -1128,7 +1462,7 @@ if (plexusContainer) {
         const cLine = new THREE.Line(cGeo, continentMaterial);
         networkGroup.add(cLine);
 
-        // Fill — create a Shape in 2D (lon, lat), then project vertices onto sphere
+        // Fill â€” create a Shape in 2D (lon, lat), then project vertices onto sphere
         const shape = new THREE.Shape();
         shape.moveTo(coords[0][1], coords[0][0]); // lon as x, lat as y
         for (let i = 1; i < coords.length; i++) {
@@ -1449,280 +1783,3 @@ navLinks.forEach(link => {
     });
 });
 
-// (gs-fade-up scroll reveals now handled by reusable animation system at top of file)
-
-// --- 1. KINETIC HERO REVEALS (GSAP) ---
-const heroTl = gsap.timeline({ delay: 0.2 }); // Wait for nav
-
-heroTl.from(".gs-hero-reveal", {
-    y: 50,
-    opacity: 0,
-    duration: 1.2,
-    stagger: 0.2,
-    ease: "power4.out"
-})
-    .from(".hero-telemetry", {
-        scale: 0.8,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "back.out(1.5)"
-    }, "-=0.8");
-
-// Continuous floating animations for the glass cards
-gsap.to(".gs-float-slow", { y: -20, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
-gsap.to(".gs-float-fast", { y: 15, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 1 });
-
-// --- 2. POWER CORE REACTOR (Three.js) ---
-const heroCanvas = document.getElementById('hero-3d-core');
-
-if (heroCanvas) {
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 250;
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    heroCanvas.appendChild(renderer.domElement);
-
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
-
-    // --- Central Glowing Core (Transformer Core) ---
-    const coreGeo = new THREE.IcosahedronGeometry(22, 2);
-    const coreMat = new THREE.MeshBasicMaterial({
-        color: 0xf3911f,
-        transparent: true,
-        opacity: 0.15,
-        wireframe: false
-    });
-    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-    coreGroup.add(coreMesh);
-
-    // Wireframe overlay on core
-    const wireGeo = new THREE.IcosahedronGeometry(23, 1);
-    const wireMat = new THREE.MeshBasicMaterial({
-        color: 0x003057,
-        transparent: true,
-        opacity: 0.2,
-        wireframe: true
-    });
-    const wireMesh = new THREE.Mesh(wireGeo, wireMat);
-    coreGroup.add(wireMesh);
-
-    // Outer shell wireframe
-    const shellGeo = new THREE.IcosahedronGeometry(45, 1);
-    const shellMat = new THREE.MeshBasicMaterial({
-        color: 0x003057,
-        transparent: true,
-        opacity: 0.05,
-        wireframe: true
-    });
-    const shellMesh = new THREE.Mesh(shellGeo, shellMat);
-    coreGroup.add(shellMesh);
-
-    // --- Orbiting Energy Particles ---
-    const PARTICLE_COUNT = 800;
-    const particles = [];
-    const positions = new Float32Array(PARTICLE_COUNT * 3);
-    const colors = new Float32Array(PARTICLE_COUNT * 3);
-    const sizes = new Float32Array(PARTICLE_COUNT);
-
-    const navy = new THREE.Color(0x003057);
-    const amber = new THREE.Color(0xf3911f);
-    const lightBlue = new THREE.Color(0x4a9fd6);
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-        const isAmber = Math.random() > 0.55;
-        const isLight = !isAmber && Math.random() > 0.7;
-
-        // Distribute particles in spherical shells around the core
-        const shellRadius = 30 + Math.random() * 120;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-
-        particles.push({
-            radius: shellRadius,
-            theta: theta,
-            phi: phi,
-            speedTheta: (0.002 + Math.random() * 0.008) * (Math.random() > 0.5 ? 1 : -1),
-            speedPhi: (0.0005 + Math.random() * 0.003) * (Math.random() > 0.5 ? 1 : -1),
-            pulsePhase: Math.random() * Math.PI * 2,
-            pulseSpeed: 1.5 + Math.random() * 2,
-            isAmber: isAmber
-        });
-
-        const col = isAmber ? amber : (isLight ? lightBlue : navy);
-        colors[i * 3] = col.r;
-        colors[i * 3 + 1] = col.g;
-        colors[i * 3 + 2] = col.b;
-
-        sizes[i] = isAmber ? 3.5 : 2.0;
-    }
-
-    const particleGeo = new THREE.BufferGeometry();
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeo.setAttribute('customColor', new THREE.BufferAttribute(colors, 3));
-    particleGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-    const particleMat = new THREE.ShaderMaterial({
-        uniforms: { uTime: { value: 0 } },
-        vertexShader: `
-            attribute vec3 customColor;
-            attribute float size;
-            varying vec3 vColor;
-            varying float vAlpha;
-            void main() {
-                vColor = customColor;
-                vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
-                float depth = -mvPos.z;
-                vAlpha = smoothstep(500.0, 80.0, depth) * 0.85;
-                gl_PointSize = max(2.0, size * (300.0 / depth));
-                gl_Position = projectionMatrix * mvPos;
-            }
-        `,
-        fragmentShader: `
-            varying vec3 vColor;
-            varying float vAlpha;
-            void main() {
-                float d = length(gl_PointCoord - vec2(0.5));
-                if (d > 0.5) discard;
-                float glow = smoothstep(0.5, 0.05, d);
-                float core = smoothstep(0.2, 0.0, d) * 0.5;
-                gl_FragColor = vec4(vColor, (glow + core) * vAlpha);
-            }
-        `,
-        transparent: true,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending
-    });
-
-    const pointCloud = new THREE.Points(particleGeo, particleMat);
-    coreGroup.add(pointCloud);
-
-    // --- Energy Connection Lines ---
-    const MAX_LINES = 400;
-    const linePositions = new Float32Array(MAX_LINES * 6);
-    const lineColors = new Float32Array(MAX_LINES * 6);
-
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    lineGeo.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
-    lineGeo.setDrawRange(0, 0);
-
-    const lineMat = new THREE.LineBasicMaterial({
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.25,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-    });
-
-    const lines = new THREE.LineSegments(lineGeo, lineMat);
-    coreGroup.add(lines);
-
-    // --- Orbiting Rings (like electron orbits) ---
-    for (let i = 0; i < 2; i++) {
-        const ringGeo = new THREE.TorusGeometry(55 + i * 25, 0.3, 8, 120);
-        const ringMat = new THREE.MeshBasicMaterial({
-            color: i === 1 ? 0xf3911f : 0x003057,
-            transparent: true,
-            opacity: 0.08 + i * 0.02
-        });
-        const ring = new THREE.Mesh(ringGeo, ringMat);
-        ring.rotation.x = (Math.PI / 3) * i;
-        ring.rotation.y = (Math.PI / 4) * i;
-        coreGroup.add(ring);
-    }
-
-    // Mouse interaction
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX - window.innerWidth / 2) * 0.0004;
-        mouseY = (e.clientY - window.innerHeight / 2) * 0.0004;
-    });
-
-    const clock = new THREE.Clock();
-
-    function animate() {
-        requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
-
-        // Pulse the core
-        const corePulse = 1 + Math.sin(t * 2) * 0.08;
-        coreMesh.scale.set(corePulse, corePulse, corePulse);
-        coreMesh.material.opacity = 0.12 + Math.sin(t * 3) * 0.05;
-
-        wireMesh.rotation.x = t * 0.15;
-        wireMesh.rotation.y = t * 0.1;
-
-        shellMesh.rotation.x = -t * 0.05;
-        shellMesh.rotation.z = t * 0.08;
-
-        // Update particle orbits
-        const pos = particleGeo.attributes.position.array;
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            const p = particles[i];
-            p.theta += p.speedTheta;
-            p.phi += p.speedPhi;
-
-            const pulse = Math.sin(t * p.pulseSpeed + p.pulsePhase) * 5;
-            const r = p.radius + pulse;
-
-            pos[i * 3] = r * Math.sin(p.phi) * Math.cos(p.theta);
-            pos[i * 3 + 1] = r * Math.sin(p.phi) * Math.sin(p.theta);
-            pos[i * 3 + 2] = r * Math.cos(p.phi);
-        }
-        particleGeo.attributes.position.needsUpdate = true;
-
-        // Build energy connection lines between nearby particles
-        let lineIdx = 0;
-        const lp = lineGeo.attributes.position.array;
-        const lc = lineGeo.attributes.color.array;
-        const DIST = 35;
-
-        for (let i = 0; i < PARTICLE_COUNT && lineIdx < MAX_LINES; i += 2) {
-            const ax = pos[i * 3], ay = pos[i * 3 + 1], az = pos[i * 3 + 2];
-            for (let j = i + 2; j < PARTICLE_COUNT && lineIdx < MAX_LINES; j += 2) {
-                const bx = pos[j * 3], by = pos[j * 3 + 1], bz = pos[j * 3 + 2];
-                const dx = ax - bx, dy = ay - by, dz = az - bz;
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                if (dist < DIST) {
-                    const li = lineIdx * 6;
-                    lp[li] = ax; lp[li + 1] = ay; lp[li + 2] = az;
-                    lp[li + 3] = bx; lp[li + 4] = by; lp[li + 5] = bz;
-
-                    const fade = 1 - dist / DIST;
-                    const c = navy.clone().lerp(amber, fade * 0.6);
-                    lc[li] = c.r; lc[li + 1] = c.g; lc[li + 2] = c.b;
-                    lc[li + 3] = c.r; lc[li + 4] = c.g; lc[li + 5] = c.b;
-                    lineIdx++;
-                }
-            }
-        }
-        lineGeo.setDrawRange(0, lineIdx * 2);
-        lineGeo.attributes.position.needsUpdate = true;
-        lineGeo.attributes.color.needsUpdate = true;
-
-        // Mouse parallax
-        coreGroup.rotation.y += (mouseX * 1.5 - coreGroup.rotation.y) * 0.09;
-        coreGroup.rotation.x += (mouseY * 1.2 - coreGroup.rotation.x) * 0.09;
-
-        // Gentle auto-rotation
-        coreGroup.rotation.y += 0.0015;
-
-        particleMat.uniforms.uTime.value = t;
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-}
