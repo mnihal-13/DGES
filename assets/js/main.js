@@ -1447,3 +1447,279 @@ navLinks.forEach(link => {
 });
 
 // (gs-fade-up scroll reveals now handled by reusable animation system at top of file)
+
+// --- 1. KINETIC HERO REVEALS (GSAP) ---
+const heroTl = gsap.timeline({ delay: 0.2 }); // Wait for nav
+
+heroTl.from(".gs-hero-reveal", {
+    y: 50,
+    opacity: 0,
+    duration: 1.2,
+    stagger: 0.2,
+    ease: "power4.out"
+})
+    .from(".hero-telemetry", {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "back.out(1.5)"
+    }, "-=0.8");
+
+// Continuous floating animations for the glass cards
+gsap.to(".gs-float-slow", { y: -20, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
+gsap.to(".gs-float-fast", { y: 15, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 1 });
+
+// --- 2. POWER CORE REACTOR (Three.js) ---
+const heroCanvas = document.getElementById('hero-3d-core');
+
+if (heroCanvas) {
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 250;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    heroCanvas.appendChild(renderer.domElement);
+
+    const coreGroup = new THREE.Group();
+    scene.add(coreGroup);
+
+    // --- Central Glowing Core (Transformer Core) ---
+    const coreGeo = new THREE.IcosahedronGeometry(22, 2);
+    const coreMat = new THREE.MeshBasicMaterial({
+        color: 0xf3911f,
+        transparent: true,
+        opacity: 0.15,
+        wireframe: false
+    });
+    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    coreGroup.add(coreMesh);
+
+    // Wireframe overlay on core
+    const wireGeo = new THREE.IcosahedronGeometry(23, 1);
+    const wireMat = new THREE.MeshBasicMaterial({
+        color: 0x003057,
+        transparent: true,
+        opacity: 0.2,
+        wireframe: true
+    });
+    const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+    coreGroup.add(wireMesh);
+
+    // Outer shell wireframe
+    const shellGeo = new THREE.IcosahedronGeometry(45, 1);
+    const shellMat = new THREE.MeshBasicMaterial({
+        color: 0x003057,
+        transparent: true,
+        opacity: 0.05,
+        wireframe: true
+    });
+    const shellMesh = new THREE.Mesh(shellGeo, shellMat);
+    coreGroup.add(shellMesh);
+
+    // --- Orbiting Energy Particles ---
+    const PARTICLE_COUNT = 800;
+    const particles = [];
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const colors = new Float32Array(PARTICLE_COUNT * 3);
+    const sizes = new Float32Array(PARTICLE_COUNT);
+
+    const navy = new THREE.Color(0x003057);
+    const amber = new THREE.Color(0xf3911f);
+    const lightBlue = new THREE.Color(0x4a9fd6);
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const isAmber = Math.random() > 0.55;
+        const isLight = !isAmber && Math.random() > 0.7;
+
+        // Distribute particles in spherical shells around the core
+        const shellRadius = 30 + Math.random() * 120;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+
+        particles.push({
+            radius: shellRadius,
+            theta: theta,
+            phi: phi,
+            speedTheta: (0.002 + Math.random() * 0.008) * (Math.random() > 0.5 ? 1 : -1),
+            speedPhi: (0.0005 + Math.random() * 0.003) * (Math.random() > 0.5 ? 1 : -1),
+            pulsePhase: Math.random() * Math.PI * 2,
+            pulseSpeed: 1.5 + Math.random() * 2,
+            isAmber: isAmber
+        });
+
+        const col = isAmber ? amber : (isLight ? lightBlue : navy);
+        colors[i * 3] = col.r;
+        colors[i * 3 + 1] = col.g;
+        colors[i * 3 + 2] = col.b;
+
+        sizes[i] = isAmber ? 3.5 : 2.0;
+    }
+
+    const particleGeo = new THREE.BufferGeometry();
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particleGeo.setAttribute('customColor', new THREE.BufferAttribute(colors, 3));
+    particleGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    const particleMat = new THREE.ShaderMaterial({
+        uniforms: { uTime: { value: 0 } },
+        vertexShader: `
+            attribute vec3 customColor;
+            attribute float size;
+            varying vec3 vColor;
+            varying float vAlpha;
+            void main() {
+                vColor = customColor;
+                vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+                float depth = -mvPos.z;
+                vAlpha = smoothstep(500.0, 80.0, depth) * 0.85;
+                gl_PointSize = max(2.0, size * (300.0 / depth));
+                gl_Position = projectionMatrix * mvPos;
+            }
+        `,
+        fragmentShader: `
+            varying vec3 vColor;
+            varying float vAlpha;
+            void main() {
+                float d = length(gl_PointCoord - vec2(0.5));
+                if (d > 0.5) discard;
+                float glow = smoothstep(0.5, 0.05, d);
+                float core = smoothstep(0.2, 0.0, d) * 0.5;
+                gl_FragColor = vec4(vColor, (glow + core) * vAlpha);
+            }
+        `,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+    });
+
+    const pointCloud = new THREE.Points(particleGeo, particleMat);
+    coreGroup.add(pointCloud);
+
+    // --- Energy Connection Lines ---
+    const MAX_LINES = 400;
+    const linePositions = new Float32Array(MAX_LINES * 6);
+    const lineColors = new Float32Array(MAX_LINES * 6);
+
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    lineGeo.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+    lineGeo.setDrawRange(0, 0);
+
+    const lineMat = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.25,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    });
+
+    const lines = new THREE.LineSegments(lineGeo, lineMat);
+    coreGroup.add(lines);
+
+    // --- Orbiting Rings (like electron orbits) ---
+    for (let i = 0; i < 2; i++) {
+        const ringGeo = new THREE.TorusGeometry(55 + i * 25, 0.3, 8, 120);
+        const ringMat = new THREE.MeshBasicMaterial({
+            color: i === 1 ? 0xf3911f : 0x003057,
+            transparent: true,
+            opacity: 0.08 + i * 0.02
+        });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = (Math.PI / 3) * i;
+        ring.rotation.y = (Math.PI / 4) * i;
+        coreGroup.add(ring);
+    }
+
+    // Mouse interaction
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.0004;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.0004;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Pulse the core
+        const corePulse = 1 + Math.sin(t * 2) * 0.08;
+        coreMesh.scale.set(corePulse, corePulse, corePulse);
+        coreMesh.material.opacity = 0.12 + Math.sin(t * 3) * 0.05;
+
+        wireMesh.rotation.x = t * 0.15;
+        wireMesh.rotation.y = t * 0.1;
+
+        shellMesh.rotation.x = -t * 0.05;
+        shellMesh.rotation.z = t * 0.08;
+
+        // Update particle orbits
+        const pos = particleGeo.attributes.position.array;
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const p = particles[i];
+            p.theta += p.speedTheta;
+            p.phi += p.speedPhi;
+
+            const pulse = Math.sin(t * p.pulseSpeed + p.pulsePhase) * 5;
+            const r = p.radius + pulse;
+
+            pos[i * 3] = r * Math.sin(p.phi) * Math.cos(p.theta);
+            pos[i * 3 + 1] = r * Math.sin(p.phi) * Math.sin(p.theta);
+            pos[i * 3 + 2] = r * Math.cos(p.phi);
+        }
+        particleGeo.attributes.position.needsUpdate = true;
+
+        // Build energy connection lines between nearby particles
+        let lineIdx = 0;
+        const lp = lineGeo.attributes.position.array;
+        const lc = lineGeo.attributes.color.array;
+        const DIST = 35;
+
+        for (let i = 0; i < PARTICLE_COUNT && lineIdx < MAX_LINES; i += 2) {
+            const ax = pos[i * 3], ay = pos[i * 3 + 1], az = pos[i * 3 + 2];
+            for (let j = i + 2; j < PARTICLE_COUNT && lineIdx < MAX_LINES; j += 2) {
+                const bx = pos[j * 3], by = pos[j * 3 + 1], bz = pos[j * 3 + 2];
+                const dx = ax - bx, dy = ay - by, dz = az - bz;
+                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                if (dist < DIST) {
+                    const li = lineIdx * 6;
+                    lp[li] = ax; lp[li + 1] = ay; lp[li + 2] = az;
+                    lp[li + 3] = bx; lp[li + 4] = by; lp[li + 5] = bz;
+
+                    const fade = 1 - dist / DIST;
+                    const c = navy.clone().lerp(amber, fade * 0.6);
+                    lc[li] = c.r; lc[li + 1] = c.g; lc[li + 2] = c.b;
+                    lc[li + 3] = c.r; lc[li + 4] = c.g; lc[li + 5] = c.b;
+                    lineIdx++;
+                }
+            }
+        }
+        lineGeo.setDrawRange(0, lineIdx * 2);
+        lineGeo.attributes.position.needsUpdate = true;
+        lineGeo.attributes.color.needsUpdate = true;
+
+        // Mouse parallax
+        coreGroup.rotation.y += (mouseX * 1.5 - coreGroup.rotation.y) * 0.03;
+        coreGroup.rotation.x += (mouseY * 1.2 - coreGroup.rotation.x) * 0.03;
+
+        // Gentle auto-rotation
+        coreGroup.rotation.y += 0.0015;
+
+        particleMat.uniforms.uTime.value = t;
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+}
