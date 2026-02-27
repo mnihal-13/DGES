@@ -116,14 +116,17 @@ const container = document.querySelector(".horizontal-container");
 const panels = gsap.utils.toArray(".panel");
 
 if (container && panels.length) {
-    let scrollTween = gsap.to(panels, {
-        xPercent: -100 * (panels.length - 1),
+    const totalScroll = () => container.scrollWidth - window.innerWidth;
+
+    let scrollTween = gsap.to(container, {
+        x: () => -totalScroll(),
         ease: "none",
         scrollTrigger: {
             trigger: ".horizontal-section",
             pin: true,
             scrub: 1,
-            end: () => "+=" + (container.offsetWidth - window.innerWidth)
+            end: () => "+=" + totalScroll(),
+            invalidateOnRefresh: true
         }
     });
 
@@ -1705,8 +1708,8 @@ if (heroCanvas) {
         lineGeo.attributes.color.needsUpdate = true;
 
         // Mouse parallax
-        coreGroup.rotation.y += (mouseX * 1.5 - coreGroup.rotation.y) * 0.03;
-        coreGroup.rotation.x += (mouseY * 1.2 - coreGroup.rotation.x) * 0.03;
+        coreGroup.rotation.y += (mouseX * 1.5 - coreGroup.rotation.y) * 0.09;
+        coreGroup.rotation.x += (mouseY * 1.2 - coreGroup.rotation.x) * 0.09;
 
         // Gentle auto-rotation
         coreGroup.rotation.y += 0.0015;
